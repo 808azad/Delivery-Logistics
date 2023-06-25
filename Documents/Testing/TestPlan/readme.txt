@@ -1,0 +1,1 @@
+ The main Test Plan and the traceability matrix should go in the TestPlan directory.
