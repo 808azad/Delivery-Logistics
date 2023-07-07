@@ -5,6 +5,6 @@
 void header() {
 	printf("=================\n");
 	printf("Seneca Deliveries\n");
-	printf("=================\n");
+	printf("=================\n\n");
 }
 
