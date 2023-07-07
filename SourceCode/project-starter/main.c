@@ -8,7 +8,8 @@ int main(void)
 	struct Route blueRoute = getBlueRoute();
 	struct Map routeMap = addRoute(&baseMap, &blueRoute);
 
-	// MS2 Newly added code - for getting Green and Yellow Route showing on the map:
+	// MS2 Newly added code:
+	// for getting Green and Yellow Route showing on the map:
 	struct Route greenRoute = getGreenRoute();
 	struct Route yellowRoute = getYellowRoute();
 
