@@ -6,6 +6,7 @@
 int main(void)
 {
 	header();
+	input();
 
 	struct Map baseMap = populateMap();
 	struct Route blueRoute = getBlueRoute();
