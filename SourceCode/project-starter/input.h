@@ -11,7 +11,7 @@
 #define szMax = 1 //cubic meter
 
 struct PackageInf{
-	int m_weight;	//valid 1-1000 Kg.
+	double m_weight;	//valid 1-1000 Kg.
 	double m_boxSize; //valid range in cubic meter: 0.25, 0.5, 1 
 	char m_destination[4]; //row num[1-25] and column letter [A-Y] Within the map
 };
