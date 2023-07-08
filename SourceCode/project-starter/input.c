@@ -59,8 +59,8 @@ int validatePackageBox(double num) {
 //returns the validated destination, ('X' = building)
 int validateDestination(char* dest) {
 	// Array of valid building addresses
-	char* arr[] = { "7A", "8A", "12A", "13A", "14A", "15A", "16A", "2B", "3B", "7B", "8B", "22B", "23B", "24B" };
-	int desNum = 14; // Number of destinations
+	char* arr[] = { "7A", "8A", "12A", "13A", "14A", "15A", "16A", "2B", "3B", "7B", "8B", "22B", "23B", "24B", "25B"};
+	int desNum = 15; // Number of destinations
 	int val = 0;
 	for (int i = 0; i < desNum; i++) {
 		if (strcmp(dest, arr[i]) == 0) {
