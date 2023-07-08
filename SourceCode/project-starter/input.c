@@ -14,7 +14,7 @@ void header() {
 //get user input to initialize shipment weight
 void input() {
 	printf("Enter shipment weight, box size and destination(0 0 x to stop) :\n");
-	int weight;
+	double weight;
 	double size;
 	char destination[4];
 	int valid = 0;
