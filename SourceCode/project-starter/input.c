@@ -22,7 +22,7 @@ void input() {
 	int valid = 0;
 
 	printf("Enter shipment weight, box size, and destination (0 0 x to stop):\n");
-	scanf("%lf, %lf, %3s", &weight, &size, destination);
+	scanf("%lf %lf %3s", &weight, &size, destination);
 
 	
 	while (!valid) {
