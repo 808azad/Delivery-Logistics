@@ -47,7 +47,7 @@ void input() {
 
 //returns 1 weight if package within limits, else 0
 int validatePackageWeight(double num) {
-	return (num >= 1 && num <= 10) ? num : 0;
+	return (num >= LOWWEIGHT && num <= HIGHWEIGHT) ? num : 0;
 }
 
 //returns 1 size if package within limits, else 0
