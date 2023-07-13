@@ -47,13 +47,13 @@ void input() {
 
 //returns 1 weight if package within limits, else 0
 int validatePackageWeight(double num) {
-	return (num >= LOWWEIGHT && num <= HIGHWEIGHT) ? num : 0;
+	return (num >= LOWWEIGHT && num <= HIGHWEIGHT) ? 1 : 0;
 }
 
 //returns 1 size if package within limits, else 0
 int validatePackageBox(double num) {
 	
-	return (num == SZMIN || num == SZMMID || num == SZMAX) ? num : 0;
+	return (num == SZMIN || num == SZMMID || num == SZMAX) ? 1 : 0;
 }
 
 //returns the validated destination, ('X' = building)
