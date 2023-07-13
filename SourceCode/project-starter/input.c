@@ -71,4 +71,9 @@ int validateDestination(char* dest) {
 	return val;
 }
 
+//print out footer onto consol HI TAEYON
+void footer() {
+
+	return;
+}
 

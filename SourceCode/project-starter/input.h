@@ -20,6 +20,9 @@ struct PackageInf{
 //print out header onto console
 void header();
 
+//print out footer onto consol
+void footer(); //NOT IMPLEMENTED HI TAEYON
+
 //get user input to enter package data related to weight, boxsize and destination, "0 0 x" to stop
 void input();
 
@@ -30,7 +33,8 @@ int validatePackageWeight(double);
 int validatePackageBox(double);
 
 //returns 1 if destination  is valid, ('X' = building re populateMap() for location of buildings from 'struct Map' )
-int validateDestination(char* dest);
+int validateDestination(char* dest); //HI TAEYON, need address
+
 
 
 #endif
