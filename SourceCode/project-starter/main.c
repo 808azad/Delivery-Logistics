@@ -1,4 +1,14 @@
-//GROUP 5 SFT 
+/***********************************************************************
+//SFT GROUP 5 PROJECT
+
+Group members:
+152953220 - TAE YONG EOM - tyeom@myseneca.ca
+051292134 - Julia Alekseev  - jalekseev@myseneca.ca
+123231227 - Chan Ka Ying - kchan151@myseneca.ca
+1122117229 - Azad Zeynalov - azeynalov1@myseneca.ca
+019153147 - Audrey Duzon - amduzon@myseneca.ca
+/////////////////////////////////////////////////////////////////
+***********************************************************************/
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
@@ -9,8 +19,8 @@ int main(void)
 {
 	struct PackageInf pkg;
 	header();
-	input(pkg);
-	footer();
+	input(&pkg);
+
 
 	struct Map baseMap = populateMap();
 	struct Route blueRoute = getBlueRoute();
@@ -26,5 +36,6 @@ int main(void)
 
 	printMap(&routeMap, 1, 1);
 
+	footer();
 	return 0;
 }
