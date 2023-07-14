@@ -2,6 +2,7 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <string.h>
 #include "input.h"
 
 
@@ -14,8 +15,7 @@ void header() {
 }
 
 //get user input to initialize shipment weight
-void input() {
-	struct PackageInf pkg;
+void input(struct PackageInf * pkg) {
 	double weight;
 	double size;
 	char destination[4];
@@ -37,10 +37,10 @@ void input() {
 			printf("Invalid destination\n");
 		}
 		else {
+			pkg->m_boxSize = size; 
+			pkg->m_weight = weight;
+			strcpy(pkg->m_destination, destination);
 			valid = 1;
-			pkg.m_boxSize = size; 
-			pkg.m_weight = weight;
-			strcpy(pkg.m_destination, destination);
 		}
 	}
 }
@@ -71,9 +71,15 @@ int validateDestination(char* dest) {
 	return val;
 }
 
-//print out footer onto consol HI TAEYON
-void footer() {
 
-	return;
+//print out footer onto consol HI TAEYONG, HI Nic
+void footer() {
+	printf("Thanks for shipping with Seneca!\n");
+}
+
+
+//Combine functions so that they can be used and print output (as instructions)
+void printOutput() {
+
 }
 

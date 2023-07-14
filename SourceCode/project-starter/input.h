@@ -24,7 +24,7 @@ void header();
 void footer(); //NOT IMPLEMENTED HI TAEYON
 
 //get user input to enter package data related to weight, boxsize and destination, "0 0 x" to stop
-void input();
+void input(struct PackageInf *);
 
 //returns 1 weight if package within limits, else 0
 int validatePackageWeight(double);
@@ -33,7 +33,9 @@ int validatePackageWeight(double);
 int validatePackageBox(double);
 
 //returns 1 if destination  is valid, ('X' = building re populateMap() for location of buildings from 'struct Map' )
-int validateDestination(char* dest); //HI TAEYON, need address
+int validateDestination(char* dest); 
+
+
 
 
 

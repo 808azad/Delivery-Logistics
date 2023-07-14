@@ -7,8 +7,10 @@
 
 int main(void)
 {
+	struct PackageInf pkg;
 	header();
-	input();
+	input(pkg);
+	footer();
 
 	struct Map baseMap = populateMap();
 	struct Route blueRoute = getBlueRoute();
