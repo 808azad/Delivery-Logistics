@@ -27,7 +27,7 @@ namespace UnitTestInputFunctions
 		// PACKAGE WEIGHT LIMITATION: 1 - 1000 kg
 		
 		TEST_METHOD(lowestNumber) {
-			double input = 0;
+			double input = 1;
 			bool actualResult = validatePackageWeight(input);
 			bool expectedResult = true;
 			Assert::AreEqual(expectedResult, actualResult);
