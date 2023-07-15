@@ -14,6 +14,7 @@ Group members:
 #include <stdio.h>
 #include <string.h>
 #include "input.h"
+#include "mapping.h"
 
 
 
@@ -37,14 +38,19 @@ int validatePackageBox(double num) {
 
 //returns the validated destination, ('X' = building)
 int validateDestination(char* dest) {
-	// Array of valid building addresses
-	char* arr[] = { "7A", "8A", "12A", "13A", "14A", "15A", "16A", "2B", "3B", "7B", "8B", "22B", "23B", "24B", "25B" };
-	int desNum = 15; // Number of destinations
+	// Array of second digit of valid building addresses
+	char arr[] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y'};
+	int desNum = 25; // Number of destinations
 	int val = 0;
-	for (int i = 0; i < desNum; i++) {
-		if (strcmp(dest, arr[i]) == 0) {
-			val = 1;
-			i = desNum; //break out of loop
+
+	//check if the destinaion is valid
+	//destination must be [NUM][ALPHABET] and NUM must be between 1 and 25 integer(inclusive), and ALPHABET must be between A and Y
+	if (dest[0] > 0 || dest[0] < 26) {
+		for (int i = 0; i < desNum; i++) {
+			if (dest[1] == arr[i]) {
+				val = 1;
+				i = desNum; //break out of loop
+			}
 		}
 	}
 	return val;
@@ -55,16 +61,15 @@ void input(struct PackageInf * pkg) {
 	double weight;
 	double size;
 	char destination[4];
-	int valid = 0;
-
-	printf("Enter shipment weight, box size, and destination (0 0 x to stop):\n");
-	int check=scanf("%lf %lf %3s", &weight, &size, destination);
-	//checks that the input receives 3 values
-	if (check != 3) {
-		printf("Input failed");
-	}
-
-	while (!valid) {
+	
+	while (weight != 0 || size != 0 || destination[0] != 'x') {
+		printf("Enter shipment weight, box size, and destination (0 0 x to stop): ");
+		int check=scanf("%lf %lf %3s", &weight, &size, destination);
+		
+		if (check != 3) {  //checks that the input receives 3 values
+			printf("Input failed");
+		}
+	
 		if (!validatePackageWeight(weight)) {
 			printf("Invalid weight (must be 1-1000 Kg.)\n");
 		}
@@ -78,10 +83,11 @@ void input(struct PackageInf * pkg) {
 			pkg->m_boxSize = size; 
 			pkg->m_weight = weight;
 			strcpy(pkg->m_destination, destination);
-			valid = 1;
 		}
 	}
 }
+
+
 
 
 //print out footer onto console

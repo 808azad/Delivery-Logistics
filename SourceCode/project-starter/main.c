@@ -17,11 +17,6 @@ Group members:
 
 int main(void)
 {
-	struct PackageInf pkg;
-	header();
-	input(&pkg);
-
-
 	struct Map baseMap = populateMap();
 	struct Route blueRoute = getBlueRoute();
 	struct Map routeMap = addRoute(&baseMap, &blueRoute);
@@ -34,8 +29,12 @@ int main(void)
 	routeMap = addRoute(&routeMap, &greenRoute);
 	routeMap = addRoute(&routeMap, &yellowRoute);
 
-	printMap(&routeMap, 1, 1);
+	// printMap(&routeMap, 1, 1);
 
+	struct PackageInf pkg;
+	header();
+	int input_valid = 0;
+	input(&pkg);
 	footer();
 	return 0;
 }
