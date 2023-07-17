@@ -97,7 +97,7 @@ void footer() {
 
 
 //Combine functions so that they can be used and print output (as instructions)
-void printOutput() {
+void  printInstructions(char* dest) {
 
 }
 

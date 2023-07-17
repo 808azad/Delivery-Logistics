@@ -46,7 +46,8 @@ int validatePackageBox(double);
 //returns 1 if destination  is valid(if the destination correspnds to the allowed destinations in the array, ('X' = building re populateMap() for location of buildings from 'struct Map' ), else return 0
 int validateDestination(char* dest); 
 
-
+//Combine functions so that they can be used and print output (as instructions)
+void printInstructions(char* dest);
 
 
 
