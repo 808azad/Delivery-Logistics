@@ -39,38 +39,46 @@ int validatePackageBox(double num) {
 //returns the validated destination, ('X' = building)
 int validateDestination(char* dest) {
 	// Array of second digit of valid building addresses
-	char arr[] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y'};
-	int desNum = 25; // Number of destinations
+	char arr[] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y' };
+	int desNum = 23; // Number of destinations (changed from 25 to 23 for the range [1, 23])
 	int val = 0;
 
-	//check if the destinaion is valid
-	//destination must be [NUM][ALPHABET] and NUM must be between 1 and 25 integer(inclusive), and ALPHABET must be between A and Y
-	if (dest[0] > 0 || dest[0] < 26) {
-		for (int i = 0; i < desNum; i++) {
-			if (dest[1] == arr[i]) {
-				val = 1;
-				i = desNum; //break out of loop
+	// Check if the destination is valid
+	// Destination must be [NUM][ALPHABET] and NUM must be between 1 and 23 (inclusive), and ALPHABET must be between A and Y
+	if (isdigit(dest[0]) && isdigit(dest[1])) { // Check if the first two characters are digits
+		int num1 = dest[0] - '0';
+		int num2 = dest[1] - '0';
+		int num = num1 * 10 + num2; // Convert the two digits to a two-digit integer
+
+		if (num >= 1 && num <= desNum) { // Check if the integer is in the valid range [1, 23]
+			for (int i = 0; i < desNum; i++) {
+				if (dest[2] == arr[i]) { // Check if the third character is a valid alphabet character
+					val = 1;
+					i = desNum; //break from loop 
+				}
 			}
 		}
 	}
 	return val;
 }
 
+
+
 //get user input to initialize shipment weight
 void input(struct PackageInf * pkg) {
-	double weight;
-	double size;
-	char destination[4];
-	
-	while (weight != 0 || size != 0 || destination[0] != 'x') {
+	double weight=0;
+	double size=0;
+	char destination[4]={ 0 };
+	int check = 0;
+	while (!check) {
 		printf("Enter shipment weight, box size, and destination (0 0 x to stop): ");
 		int check=scanf("%lf %lf %3s", &weight, &size, destination);
-		
+		while (getchar() != '\n'); // Clear the input buffer
+
 		if (check != 3) {  //checks that the input receives 3 values
-			printf("Input failed");
+			printf("Input failed\n");
 		}
-	
-		if (!validatePackageWeight(weight)) {
+		else if (!validatePackageWeight(weight)) {
 			printf("Invalid weight (must be 1-1000 Kg.)\n");
 		}
 		else if (!validatePackageBox(size)) {
@@ -79,7 +87,8 @@ void input(struct PackageInf * pkg) {
 		else if (!validateDestination(destination)) {
 			printf("Invalid destination\n");
 		}
-		else {
+		else{
+			check = 1;
 			pkg->m_boxSize = size; 
 			pkg->m_weight = weight;
 			strcpy(pkg->m_destination, destination);
@@ -97,7 +106,14 @@ void footer() {
 
 
 //Combine functions so that they can be used and print output (as instructions)
-void  printInstructions(char* dest) {
+void printInstructions(struct PackageInf* pkg, struct Map* map) {
+	// Display the chosen package details
+	printf("Shipment details:\n");
+	printf("Weight: %.2lf Kg\n", pkg->m_weight);
+	printf("Box Size: %.2lf\n", pkg->m_boxSize);
+	printf("Destination: %s\n", pkg->m_destination);
 
+	// Display the map with the chosen route
+	printf("\nMap with the chosen route:\n");
+	printMap(map, 1, 1);
 }
-
