@@ -37,14 +37,16 @@ int main(void)
 	//initialize PackageInf struct to store input data
 	struct PackageInf pkg;
 
-	//set destination point based on what we got from input function
-	struct Point destPoint = setDestPoint(&pkg);
-
 	//print header
 	header();
 
-	int input_valid = 0;
 	input(&pkg);
+
+	//set destination point based on what we got from input function
+	struct Point destPoint = setPointfromPackageInf(&pkg);
+
+	//Initialize the shortest route from start point to destination Point
+	struct Route shortestRoute = shortestPath(&routeMap, startPoint, destPoint);
 
 	//print footer
 	footer();

@@ -139,8 +139,8 @@ void printInstructions(struct PackageInf* pkg, struct Map* map) {
 }
 
 
-struct Point setDestPoint(struct PackageInf * pkg) {
+struct Point setPointfromPackageInf(struct PackageInf * pkg) {
 	struct Point destPoint;
-	strcpy(destPoint.row, pkg->m_destination[0]);
+	destPoint.row = pkg->m_destination[0];
 	return destPoint;
 }

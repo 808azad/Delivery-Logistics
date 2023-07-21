@@ -51,8 +51,8 @@ int validateDestination(char* dest);
 //Combine functions so that they can be used and print output (as instructions)
 void printInstructions(struct PackageInf* pkg, struct Map* map);
 
-
-struct Point setDestPoint(struct PackageInf *);
+//set point from PackageInfo (from what we got from user)
+struct Point setPointfromPackageInf(struct PackageInf *);
 
 
 
