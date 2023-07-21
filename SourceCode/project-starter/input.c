@@ -22,7 +22,7 @@ Group members:
 void header() {
 	printf("=================\n");
 	printf("Seneca Deliveries\n");
-	printf("=================\n\n");
+	printf("=================\n");
 }
 
 //returns 1 weight if package within limits, else 0
@@ -43,18 +43,38 @@ int validateDestination(char* dest) {
 	int desNum = 23; // Number of destinations (changed from 25 to 23 for the range [1, 23])
 	int val = 0;
 
-	// Check if the destination is valid
-	// Destination must be [NUM][ALPHABET] and NUM must be between 1 and 23 (inclusive), and ALPHABET must be between A and Y
-	if (isdigit(dest[0]) && isdigit(dest[1])) { // Check if the first two characters are digits
-		int num1 = dest[0] - '0';
-		int num2 = dest[1] - '0';
-		int num = num1 * 10 + num2; // Convert the two digits to a two-digit integer
+	//if the length of the dest is 2
+	if (strlen(dest) == 2) {
+		// Check if the destination is valid
+		// Destination must be [NUM][ALPHABET] and NUM must be between 1 and 23 (inclusive), and ALPHABET must be between A and Y
+		if (isdigit(dest[0])) { // Check if the first character is digit
+			int num = dest[0] - '0'; // based on ASCII
 
-		if (num >= 1 && num <= desNum) { // Check if the integer is in the valid range [1, 23]
-			for (int i = 0; i < desNum; i++) {
-				if (dest[2] == arr[i]) { // Check if the third character is a valid alphabet character
-					val = 1;
-					i = desNum; //break from loop 
+			if (num >= 1 && num <= desNum) { // Check if the integer is in the valid range [1, 23]
+				for (int i = 0; i < strlen(arr); i++) {
+					if (dest[1] == arr[i]) { // Check if the second character is a valid alphabet character
+						val = 1;
+						i = desNum; //break from loop 
+					}
+				}
+			}
+		}
+	}
+	//else if the length of the dest is 3
+	else if (strlen(dest) == 3) {
+		// Check if the destination is valid
+		// Destination must be [NUM][ALPHABET] and NUM must be between 1 and 23 (inclusive), and ALPHABET must be between A and Y
+		if (isdigit(dest[0]) && isdigit(dest[1])) { // Check if the first two characters are digits
+			int num1 = dest[0] - '0'; // based on ASCII
+			int num2 = dest[1] - '0'; // based on ASCII
+			int num = num1 * 10 + num2; // Convert the two digits to a two-digit integer
+
+			if (num >= 1 && num <= desNum) { // Check if the integer is in the valid range [1, 23]
+				for (int i = 0; i < strlen(arr); i++) {
+					if (dest[2] == arr[i]) { // Check if the third character is a valid alphabet character
+						val = 1;
+						i = desNum; //break from loop 
+					}
 				}
 			}
 		}
