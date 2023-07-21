@@ -1,21 +1,7 @@
-#include <stdio.h>
+#include 'convert.h'
 
+//CONVERTING CHAR INTO INT
 
-int returnChar(char letter);
-
-int main(void) {
-
-
-int x =returnChar('K');
-
-printf("%d", x);
-
-
-  
-    return 0;
-}
-	//0	1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4
-	//A B  C  D  E  F  G  H  I  J  K  L  M  N  O  P  Q  R  S  T  U  V  W  X  Y
 int returnChar(char letter){
 int value;
 
