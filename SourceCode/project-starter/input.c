@@ -22,7 +22,7 @@ Group members:
 void header() {
 	printf("=================\n");
 	printf("Seneca Deliveries\n");
-	printf("=================\n\n");
+	printf("=================\n");
 }
 
 //returns 1 weight if package within limits, else 0
@@ -45,7 +45,7 @@ int validateDestination(char* dest) {
 
 	//check if the destinaion is valid
 	//destination must be [NUM][ALPHABET] and NUM must be between 1 and 25 integer(inclusive), and ALPHABET must be between A and Y
-	if (dest[0] > 0 || dest[0] < 26) {
+	if ((int)dest[0] > 0 || (int)dest[0] < 26) {
 		for (int i = 0; i < desNum; i++) {
 			if (dest[1] == arr[i]) {
 				val = 1;
@@ -96,8 +96,4 @@ void footer() {
 }
 
 
-//Combine functions so that they can be used and print output (as instructions)
-void  printInstructions(char* dest) {
-
-}
 
