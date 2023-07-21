@@ -52,6 +52,8 @@ int validateDestination(char* dest);
 void printInstructions(struct PackageInf* pkg, struct Map* map);
 
 
+struct Point setDestPoint(struct PackageInf *);
+
 
 
 #endif

@@ -137,3 +137,10 @@ void printInstructions(struct PackageInf* pkg, struct Map* map) {
 	printf("\nMap with the chosen route:\n");
 	printMap(map, 1, 1);
 }
+
+
+struct Point setDestPoint(struct PackageInf * pkg) {
+	struct Point destPoint;
+	strcpy(destPoint.row, pkg->m_destination[0]);
+	return destPoint;
+}

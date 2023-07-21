@@ -31,10 +31,22 @@ int main(void)
 
 	// printMap(&routeMap, 1, 1);
 
+	// initialize start point
+	struct Point startPoint = { 0, 0 };
+
+	//initialize PackageInf struct to store input data
 	struct PackageInf pkg;
+
+	//set destination point based on what we got from input function
+	struct Point destPoint = setDestPoint(&pkg);
+
+	//print header
 	header();
+
 	int input_valid = 0;
 	input(&pkg);
+
+	//print footer
 	footer();
 	return 0;
 }
