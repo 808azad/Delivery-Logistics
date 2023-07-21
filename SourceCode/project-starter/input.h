@@ -21,6 +21,8 @@ Group members:
 #define SZMMID 0.5      // cubic meter
 #define SZMAX 1         // cubic meter
 
+#include "mapping.h"
+
 struct PackageInf{
 	double m_weight;	//valid 1-1000 Kg.
 	double m_boxSize; //valid range in cubic meter: 0.25, 0.5, 1 
@@ -47,7 +49,8 @@ int validatePackageBox(double);
 int validateDestination(char* dest); 
 
 //Combine functions so that they can be used and print output (as instructions)
-void printInstructions(char* dest);
+void printInstructions(struct PackageInf* pkg, struct Map* map);
+
 
 
 
