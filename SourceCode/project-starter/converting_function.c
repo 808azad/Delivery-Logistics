@@ -1,9 +1,21 @@
-#include 'convert.h'
+/***********************************************************************
+//SFT GROUP 5 PROJECT
+
+Group members:
+152953220 - TAE YONG EOM - tyeom@myseneca.ca
+051292134 - Julia Alekseev  - jalekseev@myseneca.ca
+123231227 - Chan Ka Ying - kchan151@myseneca.ca
+1122117229 - Azad Zeynalov - azeynalov1@myseneca.ca
+019153147 - Audrey Duzon - amduzon@myseneca.ca
+/////////////////////////////////////////////////////////////////
+***********************************************************************/
+
+#include "convert.h"
 
 //CONVERTING CHAR INTO INT
 
-int returnChar(char letter){
-int value;
+int returnInt(char letter){
+    int value=-1;
 
   switch(letter) {
     case 'A':
@@ -83,4 +95,88 @@ case 'P':
         break;
 }
   return value; 
+}
+
+
+char returnChar(int num) {
+    char letter='A';
+
+    switch (num) {
+    case 0:
+        letter;
+        break;
+    case 1:
+        letter = 'B';
+        break;
+    case 2:
+        letter = 'C';
+        break;
+    case 3:
+        letter = 'D';
+        break;
+    case 4:
+        letter = 'E';
+        break;
+    case 5:
+        letter = 'F';
+        break;
+    case 6:
+        letter = 'G';
+        break;
+    case 7:
+        letter = 'H';
+        break;
+    case 8:
+        letter = 'I';
+        break;
+    case 9:
+        letter = 'J';
+        break;
+    case 10:
+        letter = 'K';
+        break;
+    case 11:
+        letter = 'L';
+        break;
+    case 12:
+        letter = 'M';
+        break;
+    case 13:
+        letter = 'N';
+        break;
+    case 14:
+        letter = 'O';
+        break;
+    case 15:
+        letter = 'P';
+        break;
+    case 16:
+        letter = 'Q';
+        break;
+    case 17:
+        letter = 'R';
+        break;
+    case 18:
+        letter = 'S';
+        break;
+    case 19:
+        letter = 'T';
+        break;
+    case 20:
+        letter = 'U';
+        break;
+    case 21:
+        letter = 'V';
+        break;
+    case 22:
+        letter = 'W';
+        break;
+    case 23:
+        letter = 'X';
+        break;
+    case 24:
+        letter = 'Y';
+        break;
+    }
+    return letter;
 }

@@ -14,6 +14,11 @@ Group members:
 #ifndef CONVERT_H
 #define CONVERT_H
 
-int returnChar(char letter);
+char returnChar(int num);
+
+int returnInt(char letter); 
+
+
+
 
 #endif
