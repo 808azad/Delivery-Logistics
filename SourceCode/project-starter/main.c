@@ -40,14 +40,21 @@ int main(void)
 	//print header
 	header();
 
-	input(&pkg);
+	int flag = 1;
+	while (flag) {
+		input(&pkg);
 
-	//set destination point based on what we got from input function
-	struct Point destPoint = setPointfromPackageInf(&pkg);
+		//set destination point based on what we got from input function
+		struct Point destPoint = setPointfromPackageInf(&pkg);
 
-	//Initialize the shortest route from start point to destination Point
-	struct Route shortestRoute = shortestPath(&routeMap, startPoint, destPoint);
+		//Initialize the shortest route from start point to destination Point
+		struct Route shortestRoute = shortestPath(&routeMap, startPoint, destPoint);
 
+		//checks if user input '0 0 x' to exit.
+		if(pkg.m_weight == 0 && pkg.m_boxSize == 0 && pkg.m_destination[0] == 'x') {
+			flag = 0;
+		}
+	}
 	//print footer
 	footer();
 	return 0;

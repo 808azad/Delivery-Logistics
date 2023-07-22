@@ -52,7 +52,7 @@ int validateDestination(char* dest);
 void printInstructions(struct PackageInf* pkg, struct Map* map);
 
 //set point from PackageInfo (from what we got from user)
-struct Point setPointfromPackageInf(struct PackageInf *);
+struct Point setPointfromPackageInf(const struct PackageInf *);
 
 //calculating route
 struct Route calculateRoute(const struct PackageInf* pkg);

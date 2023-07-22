@@ -94,11 +94,17 @@ void input(struct PackageInf * pkg) {
 	int check = 0;
 	while (!check) {
 		printf("Enter shipment weight, box size, and destination (0 0 x to stop): ");
-		int check=scanf("%lf %lf %3s", &weight, &size, destination);
+		int check_input = scanf("%lf %lf %3s", &weight, &size, destination);
 		while (getchar() != '\n'); // Clear the input buffer
 
-		if (check != 3) {  //checks that the input receives 3 values
+		if (check_input != 3) {  //checks that the input receives 3 values
 			printf("Input failed\n");
+		}
+		else if(weight == 0 && size == 0 && destination[0] == 'x') {
+			check = 1;
+			pkg->m_boxSize = size; 
+			pkg->m_weight = weight;
+			strcpy(pkg->m_destination, destination);
 		}
 		else if (!validatePackageWeight(weight)) {
 			printf("Invalid weight (must be 1-1000 Kg.)\n");
@@ -171,7 +177,7 @@ struct Route calculateRoute(const struct PackageInf* pkg) {
 
 // Combine functions so that they can be used and print output (as instructions)
 void printInstructions(struct PackageInf* pkg, struct Map* map) {
-	// Display the chosen package details
+	//Display the chosen package details
 	printf("Shipment details:\n");
 	printf("Weight: %.2lf Kg\n", pkg->m_weight);
 	printf("Box Size: %.2lf\n", pkg->m_boxSize);
