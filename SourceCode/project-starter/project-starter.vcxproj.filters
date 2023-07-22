@@ -24,12 +24,18 @@
     <ClCompile Include="input.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="converting_function.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="mapping.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="convert.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mapping.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

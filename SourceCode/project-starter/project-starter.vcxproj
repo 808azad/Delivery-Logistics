@@ -127,11 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="converting_function.c" />
     <ClCompile Include="input.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="mapping.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="convert.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="mapping.h" />
   </ItemGroup>
