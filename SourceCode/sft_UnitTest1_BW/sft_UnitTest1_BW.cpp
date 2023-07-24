@@ -130,7 +130,7 @@ namespace UnitTestInputFunctions
 			Assert::AreEqual(expectedResult, actualResult);
 		}
 		TEST_METHOD(T17_valid_toStop) {
-			char* input = "X";
+			char* input = "x";
 			bool actualResult = validateDestination(input);
 			bool expectedResult = true;
 			Assert::AreEqual(expectedResult, actualResult);
@@ -220,56 +220,31 @@ namespace UnitTestInputFunctions
 			bool returnOfTheFunc = validateDestination(testValue);
 			Assert::IsTrue(returnOfTheFunc);
 		}
-		//TEST_METHOD(T31_IntendedPurpose2) {
-		//	char* testValue = "5F";
-		//	bool actualResult = validateDestination(testValue);
-		//	bool expectedResult = true;
-		//	Assert::AreEqual(expectedResult, actualResult);
-		//}
 		TEST_METHOD(T44_ClosestPossibleDestination) { // assuming that delivery location cannot be the actual office location
 			char *testValue = "1A";
 			bool returnOfTheFunc = validateDestination(testValue);
 			Assert::IsFalse(returnOfTheFunc);
 		}
-		//TEST_METHOD(T32_ClosestPossibleDestination) { // assuming that delivery location cannot be the actual office location
-		//	char* testValue = "1A";
-		//	bool actualResult = validateDestination(testValue);
-		//	bool expectedResult = false;
-		//	Assert::AreEqual(expectedResult, actualResult);
-		//}
-		TEST_METHOD(T45_FarthestPossibleDestination) {
-			char *testValue = "22Y";
+		TEST_METHOD(T45_FarthestPossibleDestination1) {
+			char *testValue = "24Y";
 			bool returnOfTheFunc = validateDestination(testValue);
 			Assert::IsTrue(returnOfTheFunc);
 		}
-		//TEST_METHOD(T33_FarthestPossibleDestination) {
-		//	char* testValue = "22Y";
-		//	bool actualResult = validateDestination(testValue);
-		//	bool expectedResult = true;
-		//	Assert::AreEqual(expectedResult, actualResult);
-		//}
-		TEST_METHOD(T46_FourCharactersForArgument) {
+		TEST_METHOD(T46_FarthestPossibleDestination2) {
+			char* testValue = "23Y";
+			bool returnOfTheFunc = validateDestination(testValue);
+			Assert::IsTrue(returnOfTheFunc);
+		}
+		TEST_METHOD(T47_FourCharactersForArgument) {
 			char *testValue = "225U";
 			bool returnOfTheFunc = validateDestination(testValue);
 			Assert::IsFalse(returnOfTheFunc);
 		}
-		//TEST_METHOD(T34_FourCharactersForArgument) {
-		//	char* testValue = "225U";
-		//	bool actualResult = validateDestination(testValue);
-		//	bool expectedResult = false;
-		//	Assert::AreEqual(expectedResult, actualResult);
-		//}
-		TEST_METHOD(T47_IrrelevantValue3) {
+		TEST_METHOD(T48_IrrelevantValue3) {
 			char *testValue = "$#%2345sdsa ";
 			bool returnOfTheFunc = validateDestination(testValue);
 			Assert::IsFalse(returnOfTheFunc);
 		}
-		//TEST_METHOD(T35_IrrelevantValue3) {
-		//	char* testValue = "$#%2345sdsa ";
-		//	bool actualResult = validateDestination(testValue);
-		//	bool expectedResult = false;
-		//	Assert::AreEqual(expectedResult, actualResult);
-		//}
 	};
 
 	// *** VALIADATION FOR USER INPUT ***
