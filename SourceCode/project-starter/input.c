@@ -52,7 +52,18 @@ int isDestinationValid(const struct Map* routeMap, int destRow, int destCol) {
     return (destinationSymbol != '#'); // true if not an obstacle (assuming '#' represents an obstacle)
 }
 
-
+/*
+1. accpeting a string for destination
+2. breakinf the string into char and ints
+3. if char == x =>exit program
+4. if int is bigger than 24 => error input
+5. else transforms the character into a number
+6. using isdestination valid checking the desitnation corresponds to the number of rows and colums
+7. if no, print invalid destination
+8. if yes, asisgn a stract of start to beginign at location 0, 0
+9. translates the destination to 1 or 0 based on the map propper values
+10. assign both strucks to shortest route
+*/
 
 void input(struct PackageInf* pkg) {
     struct Map baseMap = populateMap();
@@ -66,24 +77,25 @@ void input(struct PackageInf* pkg) {
 
     printMap(&routeMap, 1, 1);
 
-    int weight = 0;
-    double size = 0;
-    char dest[4] = { '\0' };
-    int stopInput = 0;
+    int weight = 0.0;  //the weight 
+    double size = 0;  //the size
+    char dest[100] = { '\0' }; //keeping it a char of 100 in case user enters a ridiculous destination
+    int stopInput = 0;  //flag to stop the input loop
 
-    int numRow = 0;
-    char characterDest = '\0';
+    int numRow = 0;  //the broken row number form the input
+    char characterDest = '\0';  //the broken character for colum form the input
 
     while (!stopInput) {
         printf("Enter shipment weight, box size, and destination (0 0 x to stop): ");
-        int check_input = scanf("%d %lf %3s", &weight, &size, dest);  //get user input
+        int check_input = scanf("%d %lf %99s", &weight, &size, dest);  //get user input, accepting a large number in case user enters a ridiculous destination
         checkDestInput(dest, &numRow, &characterDest);  //check if the input is valid
+  
 
-        if (check_input != 3) {
+        if (check_input != 3) { //checking that 3 inputs where accepted
             printf("Input failed\n");  //if the input is not 3 values will prompt an error
             while ((getchar()) != '\n'); // Clear input buffer
         }
-        else if (weight == 0 && size == 0 && characterDest == 'x') {
+        else if (weight == 0 && size == 0 && characterDest == 'x') { //checking if weight size are eqal to 0 and charachter equal to x break from loop
             stopInput = 1;  //if the input is 0 0 x will break from loop and terminate 
         }
         else if (!validatePackageWeight(weight)) {  //checks that pkg is a valid weight
@@ -92,28 +104,46 @@ void input(struct PackageInf* pkg) {
         else if (!validatePackageBox(size)) {  //checks that pkg is a valid size
             printf("Invalid size\n");
         }
-        else if (numRow == 0 || characterDest == '\0') { //if the destination format is not valid
+        else if (numRow == 0 || characterDest == '\0' || numRow >24) { //if the destination format is not valid
             printf("Invalid destination format\n");
         }
         else {
             // Destination validation against the map routes
             int destCol = returnInt(characterDest); //converting letter to number of columns
             if (isDestinationValid(&routeMap, numRow, destCol)) {
+                printf("Destination is valid. Processing package...\n"); //needs to be deleted after, just feedback we are good :) 
+         
+             
+          
 
-                printf("Destination is valid. Processing package...\n"); //this is temporary just to show us that we are in a good fllow
+               struct Point start = { 0,0}; // Setting the initial point
+
+               //those are correcr fucntions 
+             //  struct Point dest = translatedDirections(numRow, characterDest); // Setting delivery location
+            //   printf("size:%lf\nweight: %d,\nbegining at %d, %d\n going to row: %d, col: %d\n", size, weight, start.row, start.col, dest.row, dest.col);   
+               //when we do input which is 12L by the map it is being translated to 1,1, which carshes
+             
+             
+               
+               //struct Point dest = { 0,0 }; //works with this
+
+              // struct Point dest = { 1,1 }; //crashes
               
-                // Calculate the shortest route
-                struct Point start = { 0, 0 }; //setting the intial point
-                struct Point dest = { numRow, destCol }; //setting the numRow and destCol 
-                struct Route shortestRoute = shortestPath(&routeMap, start, dest);  // <<<<<<<<<<<<<<<<<<<<<<<<  issue is here
-                /*
-                based on the debugger, the moment it reaches here it crashes, check the fllow of shortestPath and you'll see
-                  addPtToRoute(struct Route* route, struct Point pt)
-                    {
-                    	route->points[route->numPoints++] = pt;
-                    }
-                */
+               //struct Point dest = { 1,0 }; //works with this
+              struct Point dest = { 4,3 }; //works with this
+
+               struct Route shortest = shortestPath(&routeMap, start, dest); // Calculate the shortest route
+               printf("Route Symbol: %c\n", shortest.routeSymbol);
+               printf("Route Points:\n");
+               for (int i = 0; i < shortest.numPoints; i++) {
+                   printf("(%d, %d) ", shortest.points[i].row, shortest.points[i].col);
+               }
+               printf("\n");
+
             }
+
+
+            
             else {
                 printf("Invalid destination\n"); //if the destination is not valid
             }
@@ -138,8 +168,8 @@ void checkDestInput(const char* inputString, int* num, char* character) {
             i--; // Decrement i to offset the increment in the loop
         }
         else if (isalpha(inputString[i])) {
-            characters[0] = inputString[i]; // Store only the first character
-            flag=1;
+            characters[0] = toupper(inputString[i]); // Convert to uppercase and store only the first character
+            flag = 1;
         }
     }
 

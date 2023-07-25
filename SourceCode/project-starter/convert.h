@@ -13,11 +13,13 @@ Group members:
 //HEADER OF CONVERTING FUCNTION
 #ifndef CONVERT_H
 #define CONVERT_H
+#include "mapping.h"
 
-char returnChar(int num);
 
 int returnInt(char letter); 
 
+
+struct Point translatedDirections(int row, char col);
 
 
 

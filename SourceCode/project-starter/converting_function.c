@@ -9,11 +9,10 @@ Group members:
 019153147 - Audrey Duzon - amduzon@myseneca.ca
 /////////////////////////////////////////////////////////////////
 ***********************************************************************/
-
 #include "convert.h"
+#include <stdio.h>
 
-//CONVERTING CHAR INTO INT
-
+//converting the letter into an int
 int returnInt(char letter){
     int value=-1;
 
@@ -97,86 +96,314 @@ case 'P':
   return value; 
 }
 
+//this function gets the colum char and the row int and assigns to the point sruct the coresponding values from the map
+struct Point translatedDirections(int row, char col)
+{
+    struct Point point = { 0, 0 };
 
-char returnChar(int num) {
-    char letter='A';
-
-    switch (num) {
-    case 0:
-        letter;
+    switch (col)
+    {
+    case 'A':
+        if (row != 6 && row != 7 && row != 11 && row != 12 && row != 13 && row != 14 && row != 15)
+        {
+            point.row = 0;
+            point.col = 0;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 0;
+        }
         break;
-    case 1:
-        letter = 'B';
+    case 'B':
+        if (row != 1 && row != 2 && row != 6 && row != 7 && row != 21 && row != 22 && row != 23 && row != 24)
+        {
+            point.row = 0;
+            point.col = 1;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 1;
+        }
         break;
-    case 2:
-        letter = 'C';
+    case 'C':
+        if (row != 1 && row != 2 && row != 6 && row != 7 && row != 21 && row != 22 && row != 23 && row != 24)
+        {
+            point.row = 0;
+            point.col = 2;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 2;
+        }
         break;
-    case 3:
-        letter = 'D';
+    case 'D':
+        if (row != 11 && row != 13 && row != 14 && row != 21 && row != 22 && row != 23 && row != 24)
+        {
+            point.row = 0;
+            point.col = 3;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 3;
+        }
         break;
-    case 4:
-        letter = 'E';
+    case 'E':
+        if (row != 0 && row != 1 && row != 2 && row != 3 && row != 6 && row != 7 && row != 11 && row != 13 && row != 14 && row != 21 && row != 22 && row != 23 && row != 24)
+        {
+            point.row = 0;
+            point.col = 4;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 4;
+        }
         break;
-    case 5:
-        letter = 'F';
+    case 'F':
+        if (row != 0 && row != 1 && row != 2 && row != 3 && row != 6 && row != 7 && row != 11 && row != 21 && row != 22 && row != 23 && row != 24)
+        {
+            point.row = 0;
+            point.col = 5;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 5;
+        }
         break;
-    case 6:
-        letter = 'G';
+    case 'G':
+        if (row != 0 && row != 1 && row != 2 && row != 3 && row != 6 && row != 7 && row != 21 && row != 22 && row != 23 && row != 24)
+        {
+            point.row = 0;
+            point.col = 6;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 6;
+        }
         break;
-    case 7:
-        letter = 'H';
+    case 'H':
+        if (row != 12 && row != 13 && row != 15 && row != 16 && row != 17 && row != 18 && row != 21 && row != 22 && row != 23 && row != 24)
+        {
+            point.row = 0;
+            point.col = 7;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 7;
+        }
         break;
-    case 8:
-        letter = 'I';
+    case 'I':
+        if (row != 1 && row != 2 && row != 6 && row != 7 && row != 12 && row != 13 && row != 15 && row != 16 && row != 17 && row != 18)
+        {
+            point.row = 0;
+            point.col = 8;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 8;
+        }
         break;
-    case 9:
-        letter = 'J';
+    case 'J':
+        if (row != 12 && row != 13)
+        {
+            point.row = 0;
+            point.col = 9;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 9;
+        }
         break;
-    case 10:
-        letter = 'K';
+    case 'K':
+        if (row != 2 && row != 7 && row != 8 && row != 21 && row != 22 && row != 23 && row != 24)
+        {
+            point.row = 0;
+            point.col = 0;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 0;
+        }
         break;
-    case 11:
-        letter = 'L';
+    case 'L':
+        if (row != 7 && row != 8 && row != 11 && row != 12 && row != 13 && row != 14 && row != 15 && row != 21 && row != 22 && row != 23 && row != 24)
+        {
+            point.row = 0;
+            point.col = 1;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 1;
+        }
         break;
-    case 12:
-        letter = 'M';
+    case 'M':
+        if (row != 2 && row != 11 && row != 12 && row != 13 && row != 14 && row != 15)
+        {
+            point.row = 0;
+            point.col = 2;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 2;
+        }
         break;
-    case 13:
-        letter = 'N';
+    case 'N':
+        if (row != 2 && row != 11 && row != 12 && row != 13 && row != 14 && row != 15 && row != 18 && row != 21 && row != 22 && row != 23 && row != 24)
+        {
+            point.row = 0;
+            point.col = 3;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 3;
+        }
         break;
-    case 14:
-        letter = 'O';
+    case 'O':
+        if (row != 11 && row != 12 && row != 13 && row != 14 && row != 15 && row != 18 && row != 21 && row != 22 && row != 23 && row != 24)
+        {
+            point.row = 0;
+            point.col = 4;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 4;
+        }
         break;
-    case 15:
-        letter = 'P';
+    case 'P':
+        if (row != 6 && row != 7 && row != 8 && row != 11 && row != 12 && row != 13 && row != 14 && row != 15 && row != 18 && row != 21 && row != 22 && row != 23 && row != 24)
+        {
+            point.row = 0;
+            point.col = 5;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 5;
+        }
         break;
-    case 16:
-        letter = 'Q';
+    case 'Q':
+        if (row != 1 && row != 2 && row != 11 && row != 12 && row != 13 && row != 14 && row != 15 && row != 18 && row != 21 && row != 22)
+        {
+            point.row = 0;
+            point.col = 6;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 6;
+        }
         break;
-    case 17:
-        letter = 'R';
+    case 'R':
+        if (row != 1 && row != 2 && row != 6 && row != 11 && row != 12 && row != 13 && row != 14 && row != 15 && row != 18 && row != 21 && row != 22)
+        {
+            point.row = 0;
+            point.col = 7;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 7;
+        }
         break;
-    case 18:
-        letter = 'S';
+    case 'S':
+        if (row != 6 && row != 7 && row != 8 && row != 11 && row != 12 && row != 13 && row != 14 && row != 15 && row != 18 && row != 21 && row != 22)
+        {
+            point.row = 0;
+            point.col = 8;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 8;
+        }
         break;
-    case 19:
-        letter = 'T';
+    case 'T':
+        if (row != 11 && row != 12 && row != 13 && row != 14 && row != 15 && row != 18 && row != 21 && row != 22)
+        {
+            point.row = 0;
+            point.col = 9;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 9;
+        }
         break;
-    case 20:
-        letter = 'U';
+    case 'U':
+        if (row != 1 && row != 2 && row != 11 && row != 12 && row != 13 && row != 14 && row != 15 && row != 18)
+        {
+            point.row = 0;
+            point.col = 0;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 0;
+        }
         break;
-    case 21:
-        letter = 'V';
+    case 'V':
+        if (row != 1 && row != 2 && row != 18 && row != 21 && row != 22 && row != 23)
+        {
+            point.row = 0;
+            point.col = 1;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 1;
+        }
         break;
-    case 22:
-        letter = 'W';
+    case 'W':
+        if (row != 7 && row != 8 && row != 11 && row != 12 && row != 13 && row != 14 && row != 15 && row != 18 && row != 22 && row != 23)
+        {
+            point.row = 0;
+            point.col = 2;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 2;
+        }
         break;
-    case 23:
-        letter = 'X';
+    case 'X':
+        if (row != 7 && row != 8 && row != 11 && row != 12 && row != 13 && row != 14 && row != 15 && row != 18 && row != 22 && row != 23)
+        {
+            point.row = 0;
+            point.col = 3;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 3;
+        }
         break;
-    case 24:
-        letter = 'Y';
+    case 'Y':
+        if (row != 7 && row != 8 && row != 11 && row != 12 && row != 13 && row != 14 && row != 15 && row != 18 && row != 22 && row != 23)
+        {
+            point.row = 0;
+            point.col = 4;
+        }
+        else
+        {
+            point.row = 1;
+            point.col = 4;
+        }
         break;
     }
-    return letter;
+
+    return point;
 }
