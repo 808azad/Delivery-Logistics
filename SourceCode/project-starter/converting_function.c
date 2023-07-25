@@ -104,304 +104,80 @@ struct Point translatedDirections(int row, char col)
     switch (col)
     {
     case 'A':
-        if (row != 6 && row != 7 && row != 11 && row != 12 && row != 13 && row != 14 && row != 15)
-        {
-            point.row = 0;
-            point.col = 0;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 0;
-        }
+        point.row = row;
+        point.col = (row == 6 || row == 7 || row == 11 || row == 12 || row == 13 || row == 14 || row == 15) ? 0 : 1;
         break;
     case 'B':
-        if (row != 1 && row != 2 && row != 6 && row != 7 && row != 21 && row != 22 && row != 23 && row != 24)
-        {
-            point.row = 0;
-            point.col = 1;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 1;
-        }
+        point.row = row;
+        point.col = (row == 1 || row == 2 || row == 6 || row == 7 || row == 21 || row == 22 || row == 23 || row == 24) ? 1 : 2;
         break;
     case 'C':
-        if (row != 1 && row != 2 && row != 6 && row != 7 && row != 21 && row != 22 && row != 23 && row != 24)
-        {
-            point.row = 0;
-            point.col = 2;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 2;
-        }
+        point.row = row;
+        point.col = (row == 1 || row == 2 || row == 6 || row == 7 || row == 21 || row == 22 || row == 23 || row == 24) ? 2 : 3;
         break;
     case 'D':
-        if (row != 11 && row != 13 && row != 14 && row != 21 && row != 22 && row != 23 && row != 24)
-        {
-            point.row = 0;
-            point.col = 3;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 3;
-        }
+        point.row = row;
+        point.col = (row == 11 || row == 13 || row == 14 || row == 21 || row == 22 || row == 23 || row == 24) ? 3 : 4;
         break;
     case 'E':
-        if (row != 0 && row != 1 && row != 2 && row != 3 && row != 6 && row != 7 && row != 11 && row != 13 && row != 14 && row != 21 && row != 22 && row != 23 && row != 24)
-        {
-            point.row = 0;
-            point.col = 4;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 4;
-        }
+        point.row = row;
+        point.col = (row == 0 || row == 1 || row == 2 || row == 3 || row == 6 || row == 7 || row == 11 || row == 13 || row == 14 || row == 21 || row == 22 || row == 23 || row == 24) ? 4 : 5;
         break;
     case 'F':
-        if (row != 0 && row != 1 && row != 2 && row != 3 && row != 6 && row != 7 && row != 11 && row != 21 && row != 22 && row != 23 && row != 24)
-        {
-            point.row = 0;
-            point.col = 5;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 5;
-        }
+        point.row = row;
+        point.col = (row == 0 || row == 1 || row == 2 || row == 3 || row == 6 || row == 7 || row == 11 || row == 21 || row == 22 || row == 23 || row == 24) ? 5 : 6;
         break;
     case 'G':
-        if (row != 0 && row != 1 && row != 2 && row != 3 && row != 6 && row != 7 && row != 21 && row != 22 && row != 23 && row != 24)
-        {
-            point.row = 0;
-            point.col = 6;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 6;
-        }
+        point.row = row;
+        point.col = (row == 0 || row == 1 || row == 2 || row == 3 || row == 6 || row == 7 || row == 21 || row == 22 || row == 23 || row == 24) ? 6 : 7;
         break;
     case 'H':
-        if (row != 12 && row != 13 && row != 15 && row != 16 && row != 17 && row != 18 && row != 21 && row != 22 && row != 23 && row != 24)
-        {
-            point.row = 0;
-            point.col = 7;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 7;
-        }
+        point.row = row;
+        point.col = (row == 12 || row == 13 || row == 15 || row == 16 || row == 17 || row == 18 || row == 21 || row == 22 || row == 23 || row == 24) ? 7 : 8;
         break;
     case 'I':
-        if (row != 1 && row != 2 && row != 6 && row != 7 && row != 12 && row != 13 && row != 15 && row != 16 && row != 17 && row != 18)
-        {
-            point.row = 0;
-            point.col = 8;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 8;
-        }
+        point.row = row;
+        point.col = (row == 1 || row == 2 || row == 6 || row == 7 || row == 12 || row == 13 || row == 15 || row == 16 || row == 17 || row == 18) ? 8 : 9;
         break;
     case 'J':
-        if (row != 12 && row != 13)
-        {
-            point.row = 0;
-            point.col = 9;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 9;
-        }
+        point.row = row;
+        point.col = (row == 12 || row == 13) ? 9 : 10;
         break;
     case 'K':
-        if (row != 2 && row != 7 && row != 8 && row != 21 && row != 22 && row != 23 && row != 24)
-        {
-            point.row = 0;
-            point.col = 0;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 0;
-        }
+        point.row = (row == 2 || row == 7 || row == 8 || row == 21 || row == 22 || row == 23) ? 10 : 11;
+        point.col = 0;
         break;
     case 'L':
-        if (row != 7 && row != 8 && row != 11 && row != 12 && row != 13 && row != 14 && row != 15 && row != 21 && row != 22 && row != 23 && row != 24)
-        {
-            point.row = 0;
-            point.col = 1;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 1;
-        }
+        point.row = (row == 7 || row == 8 || row == 11 || row == 12 || row == 13 || row == 14 || row == 15 || row == 21 || row == 22 || row == 23 || row == 24) ? 11 : 12;
+        point.col = 1;
         break;
     case 'M':
-        if (row != 2 && row != 11 && row != 12 && row != 13 && row != 14 && row != 15)
-        {
-            point.row = 0;
-            point.col = 2;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 2;
-        }
+        point.row = (row == 2 || row == 11 || row == 12 || row == 13 || row == 14 || row == 15) ? 12 : 13;
+        point.col = 2;
         break;
     case 'N':
-        if (row != 2 && row != 11 && row != 12 && row != 13 && row != 14 && row != 15 && row != 18 && row != 21 && row != 22 && row != 23 && row != 24)
-        {
-            point.row = 0;
-            point.col = 3;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 3;
-        }
+        point.row = (row == 2 || row == 11 || row == 12 || row == 13 || row == 14 || row == 15 || row == 18 || row == 21 || row == 22 || row == 23 || row == 24) ? 13 : 14;
+        point.col = 3;
         break;
     case 'O':
-        if (row != 11 && row != 12 && row != 13 && row != 14 && row != 15 && row != 18 && row != 21 && row != 22 && row != 23 && row != 24)
-        {
-            point.row = 0;
-            point.col = 4;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 4;
-        }
+        point.row = (row == 11 || row == 12 || row == 13 || row == 14 || row == 15 || row == 18 || row == 21 || row == 22 || row == 23 || row == 24) ? 14 : 15;
+        point.col = 4;
         break;
     case 'P':
-        if (row != 6 && row != 7 && row != 8 && row != 11 && row != 12 && row != 13 && row != 14 && row != 15 && row != 18 && row != 21 && row != 22 && row != 23 && row != 24)
-        {
-            point.row = 0;
-            point.col = 5;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 5;
-        }
+        point.row = (row == 6 || row == 7 || row == 8 || row == 11 || row == 12 || row == 13 || row == 14 || row == 15 || row == 18 || row == 21 || row == 22 || row == 23 || row == 24) ? 15 : 16;
+        point.col = 5;
         break;
     case 'Q':
-        if (row != 1 && row != 2 && row != 11 && row != 12 && row != 13 && row != 14 && row != 15 && row != 18 && row != 21 && row != 22)
-        {
-            point.row = 0;
-            point.col = 6;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 6;
-        }
+        point.row = (row == 1 || row == 2 || row == 11 || row == 12 || row == 13 || row == 14 || row == 15 || row == 18 || row == 21 || row == 22) ? 16 : 17;
+        point.col = 6;
         break;
     case 'R':
-        if (row != 1 && row != 2 && row != 6 && row != 11 && row != 12 && row != 13 && row != 14 && row != 15 && row != 18 && row != 21 && row != 22)
-        {
-            point.row = 0;
-            point.col = 7;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 7;
-        }
+        point.row = (row == 1 || row == 2 || row == 6 || row == 11 || row == 12 || row == 13 || row == 14 || row == 15 || row == 18 || row == 21 || row == 22) ? 17 : 18;
+        point.col = 7;
         break;
     case 'S':
-        if (row != 6 && row != 7 && row != 8 && row != 11 && row != 12 && row != 13 && row != 14 && row != 15 && row != 18 && row != 21 && row != 22)
-        {
-            point.row = 0;
-            point.col = 8;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 8;
-        }
-        break;
-    case 'T':
-        if (row != 11 && row != 12 && row != 13 && row != 14 && row != 15 && row != 18 && row != 21 && row != 22)
-        {
-            point.row = 0;
-            point.col = 9;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 9;
-        }
-        break;
-    case 'U':
-        if (row != 1 && row != 2 && row != 11 && row != 12 && row != 13 && row != 14 && row != 15 && row != 18)
-        {
-            point.row = 0;
-            point.col = 0;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 0;
-        }
-        break;
-    case 'V':
-        if (row != 1 && row != 2 && row != 18 && row != 21 && row != 22 && row != 23)
-        {
-            point.row = 0;
-            point.col = 1;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 1;
-        }
-        break;
-    case 'W':
-        if (row != 7 && row != 8 && row != 11 && row != 12 && row != 13 && row != 14 && row != 15 && row != 18 && row != 22 && row != 23)
-        {
-            point.row = 0;
-            point.col = 2;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 2;
-        }
-        break;
-    case 'X':
-        if (row != 7 && row != 8 && row != 11 && row != 12 && row != 13 && row != 14 && row != 15 && row != 18 && row != 22 && row != 23)
-        {
-            point.row = 0;
-            point.col = 3;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 3;
-        }
-        break;
-    case 'Y':
-        if (row != 7 && row != 8 && row != 11 && row != 12 && row != 13 && row != 14 && row != 15 && row != 18 && row != 22 && row != 23)
-        {
-            point.row = 0;
-            point.col = 4;
-        }
-        else
-        {
-            point.row = 1;
-            point.col = 4;
-        }
+        point.row = (row == 6 || row == 7 || row == 8 || row == 11 || row == 12 || row == 13 || row == 14 || row == 15 || row == 18 || row == 21 || row == 22) ? 18 : 19;
+        point.col = 8;
         break;
     }
 

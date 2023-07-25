@@ -75,7 +75,7 @@ void input(struct PackageInf* pkg) {
     routeMap = addRoute(&routeMap, &greenRoute);
     routeMap = addRoute(&routeMap, &yellowRoute);
 
-    printMap(&routeMap, 1, 1);
+   printMap(&routeMap, 1, 1); //NO NEED TO PRINT JUST REFFERENCE
 
     int weight = 0.0;  //the weight 
     double size = 0;  //the size
@@ -113,36 +113,28 @@ void input(struct PackageInf* pkg) {
             if (isDestinationValid(&routeMap, numRow, destCol)) {
                 printf("Destination is valid. Processing package...\n"); //needs to be deleted after, just feedback we are good :) 
          
-             
-          
-
                struct Point start = { 0,0}; // Setting the initial point
 
                //those are correcr fucntions 
-             //  struct Point dest = translatedDirections(numRow, characterDest); // Setting delivery location
-            //   printf("size:%lf\nweight: %d,\nbegining at %d, %d\n going to row: %d, col: %d\n", size, weight, start.row, start.col, dest.row, dest.col);   
-               //when we do input which is 12L by the map it is being translated to 1,1, which carshes
-             
+               struct Point dest = translatedDirections(numRow, characterDest); // Setting delivery location
+            
+               struct Route shortest = shortestPath(&routeMap, start, dest); // Calculate the shortest route
              
                
-               //struct Point dest = { 0,0 }; //works with this
-
-              // struct Point dest = { 1,1 }; //crashes
-              
-               //struct Point dest = { 1,0 }; //works with this
-              struct Point dest = { 4,3 }; //works with this
-
-               struct Route shortest = shortestPath(&routeMap, start, dest); // Calculate the shortest route
-               printf("Route Symbol: %c\n", shortest.routeSymbol);
-               printf("Route Points:\n");
-               for (int i = 0; i < shortest.numPoints; i++) {
-                   printf("(%d, %d) ", shortest.points[i].row, shortest.points[i].col);
+               /// we are here :) 
+               printf(" %c", shortest.routeSymbol);
+               if (shortest.routeSymbol == '') {    // NEED TO FIGURE OUT THE SYBOL TO BE PROPELY ASSIGNED 
+                   printf("Ship on BLUE LINE, no diversion\n");
                }
-               printf("\n");
+               else if (shortest.routeSymbol == '') {
+                   printf("Ship on GREEN LINE, divert:");
+                   for (int i = 0; i < shortest.numPoints; i++) {
+                       printf(" %c%d", shortest.points[i].col + 'A', shortest.points[i].row + 1);
+                   }
+                   printf("\n");
+               }
 
             }
-
-
             
             else {
                 printf("Invalid destination\n"); //if the destination is not valid
