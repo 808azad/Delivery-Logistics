@@ -41,8 +41,8 @@ int validatePackageBox(double num) {
 }
 
 int isDestinationValid(const struct Map* routeMap, int destRow, int destCol) {
-    size_t maxRow = routeMap->numRows;
-    size_t maxCol = routeMap->numCols;
+    size_t maxRow = MAP_ROWS;
+    size_t maxCol = MAP_COLS;
 
     if (destRow < 1 || destRow > maxRow || destCol < 1 || destCol > maxCol) {
         return 0; // false, invalid row or column
@@ -95,7 +95,7 @@ void input(struct PackageInf* pkg) {
             printf("Input failed\n");  //if the input is not 3 values will prompt an error
             while ((getchar()) != '\n'); // Clear input buffer
         }
-        else if (weight == 0 && size == 0 && characterDest == 'x') { //checking if weight size are eqal to 0 and charachter equal to x break from loop
+        else if (weight == 0 && size == 0 && characterDest == 'X') { //checking if weight size are eqal to 0 and charachter equal to x break from loop
             stopInput = 1;  //if the input is 0 0 x will break from loop and terminate 
         }
         else if (!validatePackageWeight(weight)) {  //checks that pkg is a valid weight
