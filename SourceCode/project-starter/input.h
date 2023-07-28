@@ -50,6 +50,7 @@ int validatePackageWeight(double);
 //returns 1 if package within cubic meter limits (0.25/0.5/1), else 0
 int validatePackageBox(double);
 
-
+//returns the symbol associated with the row, colum arg see MAP
+char returnSymb(const struct Map* routeMap, int destRow, int destCol);
 
 #endif

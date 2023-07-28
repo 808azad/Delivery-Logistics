@@ -177,7 +177,22 @@ void footer() {
 	printf("Thanks for shipping with Seneca!\n");
 }
 
+//returns the symbol associated with the row, colum arg
+char returnSymb(const struct Map* routeMap, int destRow, int destCol) {
+    size_t maxRow = MAP_ROWS;
+    size_t maxCol = MAP_COLS;
 
+    //sym[map->squares[r - base1][c]]
+    char destinationSymbol = routeMap->squares[destRow][destCol]; //returns the MACRO value per color see mapping.h
+    return destinationSymbol;
+
+    /*SAMPLE TEST:
+                char symb = returnSymb(&routeMap, 0, 0); //address 0A returns 14
+                char sym2 = returnSymb(&routeMap, 12, 11); //address 12L returns 1
+                char sym3 = returnSymb(&routeMap, 8, 24); //8Y returns 1
+                char sym4 = returnSymb(&routeMap, 0, 11);//1L returns 4*/
+
+}
 
 
 
