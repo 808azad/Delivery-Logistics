@@ -1,7 +1,7 @@
 /***********************************************************************
 //SFT GROUP 5 PROJECT
 
-Group members: 
+Group members:
 152953220 - TAE YONG EOM - tyeom@myseneca.ca
 051292134 - Julia Alekseev  - jalekseev@myseneca.ca
 123231227 - Chan Ka Ying - kchan151@myseneca.ca
@@ -23,7 +23,7 @@ Group members:
 
 #include "mapping.h"
 
-struct PackageInf{
+struct PackageInf {
 	double m_weight;	//valid 1-1000 Kg.
 	double m_boxSize; //valid range in cubic meter: 0.25, 0.5, 1 
 };
@@ -33,10 +33,10 @@ struct PackageInf{
 void header();
 
 //print out footer onto consol, "Thank you messegae"
-void footer(); 
+void footer();
 
 //get user input to enter package data related to weight, boxsize and destination, "0 0 x" to stop
-void input(struct PackageInf *);
+void input(struct PackageInf*);
 
 
 
@@ -52,5 +52,11 @@ int validatePackageBox(double);
 
 //returns the symbol associated with the row, colum arg see MAP
 char returnSymb(const struct Map* routeMap, int destRow, int destCol);
+
+//CONVERSION: returns a point struct based on a validated destination, 12L = 12, 11
+struct Point rtnPtforDest(int row, int col);
+
+//returns the closest based on dest arg point to main
+struct Point lineToShip(const struct Point dest, struct Route blueRoute, struct Route greenRoute, struct Route yellowRoute);
 
 #endif
