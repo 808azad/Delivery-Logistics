@@ -59,4 +59,5 @@ struct Point rtnPtforDest(int row, int col);
 //returns the closest based on dest arg point to main
 struct Point lineToShip(const struct Point dest, struct Route blueRoute, struct Route greenRoute, struct Route yellowRoute);
 
+void printRouteDiversion(const struct Route* diversion, const struct Route* originalRoute, const struct Point* dest);
 #endif

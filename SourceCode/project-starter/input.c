@@ -126,22 +126,6 @@ void input(struct PackageInf* pkg) {
                 //struct Point dest = translatedDirections(numRow, characterDest); // Setting delivery location
                 struct Point dest = rtnPtforDest(numRow, destCol); //convert to a Point
                 closestPt = lineToShip(dest, blueRoute, greenRoute, yellowRoute); //returns closest point
-
-
-
-                //we are here :) ===============================================
-               //printf(" %c", shortest.routeSymbol);
-               //if (shortest.routeSymbol == '') {    // NEED TO FIGURE OUT THE SYBOL TO BE PROPELY ASSIGNED 
-               //    printf("Ship on BLUE LINE, no diversion\n");
-               //}
-               //else if (shortest.routeSymbol == '') {
-               //    printf("Ship on GREEN LINE, divert:");
-               //    for (int i = 0; i < shortest.numPoints; i++) {
-               //        printf(" %c%d", shortest.points[i].col + 'A', shortest.points[i].row + 1);
-               //    }
-               //    printf("\n");
-               //}===============================================================
-
             }
             else {
                 printf("Invalid destination\n"); //if the destination is not valid
@@ -216,49 +200,114 @@ struct Point rtnPtforDest(int row, int col) {
 }
 
 
-//returns the closest based on dest arg point to main
-struct Point lineToShip(const struct Point dest, struct Route blueRoute, struct Route greenRoute, struct Route yellowRoute) {
-    double distanceVal[3] = { 0 }; //to store the comparison between distances of Points in routes
-    double shortestVal = DBL_MAX; //to temp store the shortest value
+
+// Function to print the route diversion (if any) and the destination point
+void printRouteDiversion(const struct Route* diversion, const struct Route* originalRoute, const struct Point* dest) {
+    // Loop variable
+    int i;
+
+    // Check if there is a route diversion (if the number of points in the diversion is greater than 0)
+    if (diversion->numPoints > 0) {
+        // Print the message indicating a diversion is present
+        printf("divert: ");
+
+        // Loop through the points in the diversion route and print them
+        for (i = 0; i < diversion->numPoints; i++) {
+            // Print a comma and space before each point except the first one
+            if (i > 0)
+                printf(", ");
+
+            // Print the row and column values of the current point in the diversion route
+            printf("%d%c", diversion->points[i].row, 'A' + diversion->points[i].col);
+        }
+
+        // Print the destination point's row and column values
+        printf(", %d%c", dest->row, 'A' + dest->col);
+    }
+    else {
+        // If there is no diversion needed, print this message
+        printf("No diversion needed. ");
+    }
+
+    // Print a new line at the end of the function to separate output from the next print statement.
+    printf("\n");
+}
+
+
+// Function to find the closest point on the three routes (blue, green, and yellow) to the destination point
+struct Point lineToShip(const struct Point dest, struct Route blueRoute, struct Route greenRoute, struct Route yellowRoute)
+{
+    // Array to store the distances from the destination point to the closest points on each route
+    double distanceVal[3] = { 0 };
+
+    // Variable to store the shortest distance found so far
+    double shortestVal = DBL_MAX;
+
+    // Loop variable
     int i = 0;
-    struct Point closestPt = { 0 }; //store the closet point to dest
 
-    int idxofClosestBlue = getClosestPoint(&blueRoute, dest); // see if closest point is here in Blue
-    int idxofClosestGreen = getClosestPoint(&greenRoute, dest); // see if closest point is here in Green
-    int idxofClosestYellow = getClosestPoint(&yellowRoute, dest); // see if closest point is here in Yellow
+    // Variable to store the closest point found
+    struct Point closestPt = { 0 };
 
-    distanceVal[0] = distance(&blueRoute.points[idxofClosestBlue], &dest); //calculate the distance from dest to idx
-    distanceVal[1] = distance(&greenRoute.points[idxofClosestGreen], &dest); //calculate the distance from dest to idx
-    distanceVal[2] = distance(&yellowRoute.points[idxofClosestYellow], &dest); //calculate the distance from dest to idx
+    // Find the index of the closest point on the blue route to the destination
+    int idxofClosestBlue = getClosestPoint(&blueRoute, dest);
 
-    for (i = 0; i < 3; i++) { //loop and find which is the shortest distance of the three
-        if (distanceVal[i] < shortestVal) {
-            shortestVal = distanceVal[i]; //stores the closest val to dest based on distance
-            int idxclosest = i; //the idx of closest distance
+    // Find the index of the closest point on the green route to the destination
+    int idxofClosestGreen = getClosestPoint(&greenRoute, dest);
+
+    // Find the index of the closest point on the yellow route to the destination
+    int idxofClosestYellow = getClosestPoint(&yellowRoute, dest);
+
+    // Calculate the distances from the destination point to the closest points on each route
+    distanceVal[0] = distance(&blueRoute.points[idxofClosestBlue], &dest);
+    distanceVal[1] = distance(&greenRoute.points[idxofClosestGreen], &dest);
+    distanceVal[2] = distance(&yellowRoute.points[idxofClosestYellow], &dest);
+
+    // Loop through the distanceVal array to find the shortest distance and the corresponding closest point
+    for (i = 0; i < 3; i++)
+    {
+        if (distanceVal[i] < shortestVal)
+        {
+            shortestVal = distanceVal[i];
+            // Set the closestPt to the corresponding closest point based on the shortest distance
+            closestPt = i == 0 ? blueRoute.points[idxofClosestBlue]
+                : (i == 1 ? greenRoute.points[idxofClosestGreen]
+                    : yellowRoute.points[idxofClosestYellow]);
         }
     }
 
-    //store the Point of the closest distance from our dest
-    if (shortestVal == distanceVal[0]) { //blue route has closest Point
-        closestPt = blueRoute.points[idxofClosestBlue];
+    // Check which route the ship is on based on the shortestVal and print the corresponding message
+    if (shortestVal == distanceVal[0])
+    {
         printf("Ship on BLUE LINE, ");
+
+        // Find the shortest path diversion from the blue route to the destination point
+        struct Route blueDiversion = shortestPath(&blueRoute, closestPt, dest);
+
+        // Print the route diversion and details
+        printRouteDiversion(&blueDiversion, &blueRoute, &dest);
     }
-    else if (shortestVal == distanceVal[1]) { //green route has closest Point
-        closestPt = greenRoute.points[idxofClosestGreen];
+    else if (shortestVal == distanceVal[1])
+    {
         printf("Ship on GREEN LINE, ");
+
+        // Find the shortest path diversion from the green route to the destination point
+        struct Route greenDiversion = shortestPath(&greenRoute, closestPt, dest);
+
+        // Print the route diversion and details
+        printRouteDiversion(&greenDiversion, &greenRoute, &dest);
     }
-    else if (shortestVal == distanceVal[2]) { //yellow has closest Point
-        closestPt = yellowRoute.points[idxofClosestYellow];
+    else if (shortestVal == distanceVal[2])
+    {
         printf("Ship on YELLOW LINE, ");
+
+        // Find the shortest path diversion from the yellow route to the destination point
+        struct Route yellowDiversion = shortestPath(&yellowRoute, closestPt, dest);
+
+        // Print the route diversion and details
+        printRouteDiversion(&yellowDiversion, &yellowRoute, &dest);
     }
 
-    printf("\n Divert: \n");
-    //here!! 
-    //possible turn to its own function to perform the DIVERT/NO DIVERT
-    //possible need the route and idx of next closest line & point
-
-
+    // Return the closest point found
     return closestPt;
-
-
 }

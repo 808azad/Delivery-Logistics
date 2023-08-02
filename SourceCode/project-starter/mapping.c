@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "mapping.h"
 #include "math.h"
-
+#define LINE_NONE 0
 struct Map populateMap()
 {
 	struct Map result = {
@@ -233,7 +233,7 @@ struct Route shortestPath(const struct Map* map, const struct Point start, const
 	{
 		possible = getPossibleMoves(map, current, last);
 		close = getClosestPoint(&possible, dest);
-		if (close >= 0)
+	if (close >= 0)
 		{
 			last = current;
 			current = possible.points[close];
@@ -246,8 +246,8 @@ struct Route shortestPath(const struct Map* map, const struct Point start, const
 
 struct Route getPossibleMoves(const struct Map* map, const struct Point p1, const struct Point backpath)
 {
-	struct Route result = { {0,0}, 0, DIVERSION };
-
+	//struct Route result = { {0,0}, 0, DIVERSION };
+	struct Route result = { {0}, 0, LINE_NONE };
 	if (p1.row > 0 )
 	{
 		if(map->squares[p1.row - 1][p1.col] != 1) addPointToRouteIfNot(&result, p1.row - 1, p1.col, backpath);	// square above
