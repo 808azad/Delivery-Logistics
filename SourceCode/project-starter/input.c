@@ -134,9 +134,9 @@ void input(struct PackageInf* pkg) {
 
 
     }
-    printf("================================== THE MAP ==================================\n");
-    putchar('\n');
-    printMap(&routeMap, 1, 1); //NO NEED TO PRINT JUST REFFERENCE
+  //  printf("================================== THE MAP ==================================\n");
+ //   putchar('\n');
+  //  printMap(&routeMap, 1, 1); //NO NEED TO PRINT JUST REFFERENCE
 }
 
 
