@@ -14,7 +14,7 @@ Group members:
 
 //converting the letter into an int
 int returnInt(char letter){
-    int value=-1;
+    int value = -1;
 
   switch(letter) {
     case 'A':
