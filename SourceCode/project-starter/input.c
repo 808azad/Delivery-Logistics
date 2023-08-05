@@ -70,9 +70,9 @@ int isDestinationValid(const struct Map* routeMap, int destRow, int destCol) {
 */
 
 void input(struct PackageInf* pkg) {
-    //double distanceVal[3] = { 0 }; //to store the comparison between routes
-    //double shortestVal = DBL_MAX; //to temp store the shortest value
-    //int i = 0;
+    //always in order of [0]BLUE, [1]GREEN, [2]YELLOW, [3]temp for storage until line selected
+    struct PackageInf trucks[4] = { {0} };
+
     struct Point closestPt = { 0 };
     //above is new addition by auds
 
@@ -96,7 +96,7 @@ void input(struct PackageInf* pkg) {
     char characterDest = '\0';  //the broken character for colum form the input
 
     while (!stopInput) {
-        printf("Enter shipment weight, box size, and destination (0 0 x to stop): ");
+        printf("\nEnter shipment weight, box size, and destination (0 0 x to stop): ");
         int check_input = scanf("%d %lf %99s", &weight, &size, dest);  //get user input, accepting a large number in case user enters a ridiculous destination
         checkDestInput(dest, &numRow, &characterDest);  //check if the input is valid
 
@@ -123,12 +123,17 @@ void input(struct PackageInf* pkg) {
             if (isDestinationValid(&routeMap, numRow, destCol)) {
                 printf("Destination is valid. Processing package...\n"); //needs to be deleted after, just feedback we are good :) 
 
+                //STORE ALL PACKAGE data here
+                trucks[3].m_boxSize = size;
+                trucks[3].m_weight = weight;
+
                 struct Point start = { 0,0 }; // Setting the initial point
 
                 //those are correcr fucntions 
                 //struct Point dest = translatedDirections(numRow, characterDest); // Setting delivery location
                 struct Point dest = rtnPtforDest(numRow, destCol); //convert to a Point
-                closestPt = lineToShip(dest, blueRoute, greenRoute, yellowRoute); //returns closest point
+                closestPt = lineToShip(dest, blueRoute, greenRoute, yellowRoute, trucks); //returns closest point, pass entire truck package array
+
             }
             else {
                 printf("Invalid destination\n"); //if the destination is not valid
@@ -205,7 +210,6 @@ struct Point rtnPtforDest(int row, int col) {
 
 
 // Function to print the route diversion (if any) and the destination point
-// Function to print the route diversion (if any) and the destination point
 void printRouteDiversion(const struct Route* diversion, const struct Route* originalRoute, const struct Point* dest) {
     // Loop variable
     int i;
@@ -215,9 +219,10 @@ void printRouteDiversion(const struct Route* diversion, const struct Route* orig
 
     if (distanceToDest == 0) { //return is 0 since idx[0].point == dest point shortest route returns this
 
-        //need new path, the diversion is symbol is 0
-        
+        //new new path 
 
+
+        //!!!!! HI JULIA :D LIKELY CORRECT BUT MUST CHANGE W NEW ROUTE DATA RE:DIVERSION
         // Check if there is a route diversion (if the number of points in the diversion is greater than 0)
         if (diversion->numPoints > 0) {
             // Print the message indicating a diversion is present
@@ -254,16 +259,28 @@ void printRouteDiversion(const struct Route* diversion, const struct Route* orig
 
 
 // Function to find the closest point on the three routes (blue, green, and yellow) to the destination point
-struct Point lineToShip(const struct Point dest, struct Route blueRoute, struct Route greenRoute, struct Route yellowRoute)
-{
-    // Array to store the distances from the destination point to the closest points on each route
-    double distanceVal[3] = { 0 };
+struct Point lineToShip(const struct Point dest, struct Route blueRoute, struct Route greenRoute, struct Route yellowRoute, struct PackageInf validPack[])
+{// Loop variable
+    double tempWeight = 0.0; //to store temp weight, only reassign when valid
+    int i = 0, j = 0;
+    //for (i = 0; i < 4; i++) {
+    //    tempWeight += validPack[i].m_weight;
+    //}
+    tempWeight = validPack[3].m_weight; //idx[3] == TEMP
+
+
+
+
+    //array to store in asendibng order of distance:    CLOSEST TO FURTHERST
+    double ascendingDist[3] = { 0 };
+
+    // Array to store the distances from the destination point to the closest points on each route; DO NOT REARRANGE THIS
+    double distanceVal[3] = { 0 }; //ALWAYS IN ORDER OF B,G,Y
 
     // Variable to store the shortest distance found so far
     double shortestVal = DBL_MAX;
 
-    // Loop variable
-    int i = 0;
+
 
     // Variable to store the closest point found
     struct Point closestPt = { 0 };
@@ -282,51 +299,160 @@ struct Point lineToShip(const struct Point dest, struct Route blueRoute, struct 
     distanceVal[1] = distance(&greenRoute.points[idxofClosestGreen], &dest);
     distanceVal[2] = distance(&yellowRoute.points[idxofClosestYellow], &dest);
 
+
+
+
     // Loop through the distanceVal array to find the shortest distance and the corresponding closest point
     for (i = 0; i < 3; i++)
     {
+        ascendingDist[i] = distanceVal[i]; //copy into this array to be sorted in ascending order
+
         if (distanceVal[i] < shortestVal)
         {
             shortestVal = distanceVal[i];
-            // Set the closestPt to the corresponding closest point based on the shortest distance
+            // Set the closestPt to the corresponding closest point based on the shortest distance WOW :D
             closestPt = i == 0 ? blueRoute.points[idxofClosestBlue]
                 : (i == 1 ? greenRoute.points[idxofClosestGreen]
                     : yellowRoute.points[idxofClosestYellow]);
         }
     }
 
+    //restructure of distance, do not touch the original distannce Val array; BUBBLE SORT ASCENDING
+    for (i = 0; i < 3 - 1; i++) {
+        for (j = 0; j < 3 - 1; j++) {
+            if (ascendingDist[j] > ascendingDist[j + 1]) {
+                double tempH = ascendingDist[j];
+                ascendingDist[j] = distanceVal[j + 1];
+                ascendingDist[j + 1] = tempH;
+            }
+        }
+
+    }
+
+
     // Check which route the ship is on based on the shortestVal and print the corresponding message
-    if (shortestVal == distanceVal[0])
+    if (shortestVal == distanceVal[0]) //blue
     {
         printf("Ship on BLUE LINE, ");
 
-        // Find the shortest path diversion from the blue route to the destination point
-        struct Route blueDiversion = shortestPath(&blueRoute, closestPt, dest);
 
-        // Print the route diversion and details
-        printRouteDiversion(&blueDiversion, &blueRoute, &dest);
+        if (tempWeight + validPack[0].m_weight > 1000) { //if new addition is out of bounds
+            printf("\nCAPACITY REACHED! Go to next closet Route\n");
+            if (ascendingDist[1] == distanceVal[1]) {
+                printf("Ship on GREEN LINE, "); //new route
+                // Find the shortest path diversion from the blue route to the destination point
+                struct Route greenDiversion = shortestPath(&greenRoute, closestPt, dest);
+                // Print the route diversion and details
+                printRouteDiversion(&greenDiversion, &greenRoute, &dest);
+            }
+            else {
+                printf("Ship on YELLOW LINE, "); //new route
+                // Find the shortest path diversion from the blue route to the destination point
+                struct Route yellowDiversion = shortestPath(&yellowRoute, closestPt, dest);
+                // Print the route diversion and details
+                printRouteDiversion(&yellowDiversion, &yellowRoute, &dest);
+            }
+
+        }
+        else {//blue
+            validPack[0].m_weight += tempWeight; //add to idx[0] == BLUE
+
+            // Find the shortest path diversion from the blue route to the destination point
+            struct Route blueDiversion = shortestPath(&blueRoute, closestPt, dest);
+
+            // Print the route diversion and details
+            printRouteDiversion(&blueDiversion, &blueRoute, &dest);
+        }
+
+
     }
-    else if (shortestVal == distanceVal[1])
+    else if (shortestVal == distanceVal[1]) //green
     {
         printf("Ship on GREEN LINE, ");
 
-        // Find the shortest path diversion from the green route to the destination point
-        struct Route greenDiversion = shortestPath(&greenRoute, closestPt, dest);
+        if (tempWeight + validPack[1].m_weight > 1000) { //if new addition is out of bounds
+            printf("Go next closet Route");
+            printf("\nCAPACITY REACHED! Go to next closet Route\n");
+            if (ascendingDist[1] == distanceVal[0]) {
+                printf("Ship on BLUE LINE, "); //new route
+                // Find the shortest path diversion from the blue route to the destination point
+                struct Route blueDiversion = shortestPath(&blueRoute, closestPt, dest);
+                // Print the route diversion and details
+                printRouteDiversion(&blueDiversion, &blueRoute, &dest);
+            }
+            else {
+                printf("Ship on YELLOW LINE, "); //new route
+                // Find the shortest path diversion from the blue route to the destination point
+                struct Route yellowDiversion = shortestPath(&yellowRoute, closestPt, dest);
+                // Print the route diversion and details
+                printRouteDiversion(&yellowDiversion, &greenRoute, &dest);
+            }
+        }
+        else { //green
+            validPack[1].m_weight += tempWeight; //add to idx[1] == GREEN
+            // Find the shortest path diversion from the green route to the destination point
+            struct Route greenDiversion = shortestPath(&greenRoute, closestPt, dest);
 
-        // Print the route diversion and details
-        printRouteDiversion(&greenDiversion, &greenRoute, &dest);
+            //trial here
+
+
+
+            // Print the route diversion and details
+            printRouteDiversion(&greenDiversion, &greenRoute, &dest);
+        }
     }
     else if (shortestVal == distanceVal[2])
     {
         printf("Ship on YELLOW LINE, ");
+        if (tempWeight + validPack[2].m_weight > 1000) { //if new addition is out of bounds
+            printf("\nCAPACITY REACHED! Go to next closet Route\n");
+            if (ascendingDist[1] == distanceVal[0]) {
+                printf("Ship on BLUE LINE, "); //new route
+                // Find the shortest path diversion from the blue route to the destination point
+                struct Route blueDiversion = shortestPath(&blueRoute, closestPt, dest);
+                // Print the route diversion and details
+                printRouteDiversion(&blueDiversion, &blueRoute, &dest);
+            }
+            else {
+                printf("Ship on GREEN LINE, "); //new route
+                // Find the shortest path diversion from the blue route to the destination point
+                struct Route greenDiversion = shortestPath(&greenRoute, closestPt, dest);
+                // Print the route diversion and details
+                printRouteDiversion(&greenDiversion, &greenRoute, &dest);
+            }
 
-        // Find the shortest path diversion from the yellow route to the destination point
-        struct Route yellowDiversion = shortestPath(&yellowRoute, closestPt, dest);
 
-        // Print the route diversion and details
-        printRouteDiversion(&yellowDiversion, &yellowRoute, &dest);
+        }
+        else { //yellow
+            validPack[2].m_weight += tempWeight; //add to idx[2] == YELLOW
+
+
+            // Find the shortest path diversion from the yellow route to the destination point
+            struct Route yellowDiversion = shortestPath(&yellowRoute, closestPt, dest);
+
+            // Print the route diversion and details
+            printRouteDiversion(&yellowDiversion, &yellowRoute, &dest);
+        }
     }
 
     // Return the closest point found
+
+    //reset idx[3] 
+    validPack[3].m_weight = 0.0;
+
     return closestPt;
+
+}
+
+
+//hard code the 8Y divertion route
+struct Route newPath8Y(void) {
+    int i = 0;
+    struct Point divertG[7] = { {7,19},{7,20}, {7,21},{7,22},{7,23},{7,24},{8,24} };//for 8Y path
+    struct Route divertRouteG;
+    for (i = 0; i < 6; i++) {
+        addPtToRoute(&divertRouteG, divertG[i]);
+    }
+
+    return divertRouteG;
 }

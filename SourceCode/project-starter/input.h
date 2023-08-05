@@ -40,8 +40,10 @@ void input(struct PackageInf*);
 
 
 
-//checks the destination input, and breaks it into an int and char
+//checks the destination returns 1 if symbol == 1 ie building, else false
 int isDestinationValid(const struct Map* routeMap, int destRow, int destCol);
+
+//checks that destination is within the A-Y and 1-25 limit, pass by address
 void checkDestInput(const char* inputString, int* num, char* character);
 
 //returns 1 weight if package within limits (1-1000), else 0
@@ -57,7 +59,10 @@ char returnSymb(const struct Map* routeMap, int destRow, int destCol);
 struct Point rtnPtforDest(int row, int col);
 
 //returns the closest based on dest arg point to main
-struct Point lineToShip(const struct Point dest, struct Route blueRoute, struct Route greenRoute, struct Route yellowRoute);
+struct Point lineToShip(const struct Point dest, struct Route blueRoute, struct Route greenRoute, struct Route yellowRoute, struct PackageInf validPack[]);
 
+//prints the new route diversion onto console in '7T' format
 void printRouteDiversion(const struct Route* diversion, const struct Route* originalRoute, const struct Point* dest);
+
+
 #endif

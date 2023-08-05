@@ -1,7 +1,7 @@
 /***********************************************************************
 //SFT GROUP 5 PROJECT
 
-Group members: 
+Group members:
 152953220 - TAE YONG EOM - tyeom@myseneca.ca
 051292134 - Julia Alekseev  - jalekseev@myseneca.ca
 123231227 - Chan Ka Ying - kchan151@myseneca.ca
@@ -15,8 +15,8 @@ Group members:
 #define CONVERT_H
 #include "mapping.h"
 
-
-int returnInt(char letter); 
+//return the int value score of the letter param
+int returnInt(char letter);
 
 
 struct Point translatedDirections(int row, char col);
