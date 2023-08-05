@@ -49,8 +49,11 @@ int isDestinationValid(const struct Map* routeMap, int destRow, int destCol) {
         return 0; // false, invalid row or column
     }
 
-    char destinationSymbol = routeMap->squares[destRow - 1][destCol - 1];
-    return (destinationSymbol != '#'); // true if not an obstacle (assuming '#' represents an obstacle)
+    char destinationSymbol = routeMap->squares[destRow][destCol]; // returns the destination symbol assigned to address
+    return destinationSymbol == 1 ? 1 : 0; //only 1 for a building address
+    //return (destinationSymbol != '#'); // true if not an obstacle (assuming '#' represents an obstacle)
+    
+
 }
 
 /*
@@ -130,6 +133,7 @@ void input(struct PackageInf* pkg) {
             }
             else {
                 printf("Invalid destination\n"); //if the destination is not valid
+                stopInput = 0;
             }
         }
 
@@ -293,7 +297,7 @@ struct Point lineToShip(const struct Point dest, struct Route blueRoute, struct 
         printf("Ship on BLUE LINE, ");
 
         // Find the shortest path diversion from the blue route to the destination point
-        struct Route blueDiversion = shortestPath(baseMap, closestPt, dest);
+        struct Route blueDiversion = shortestPath(&baseMap, closestPt, dest);
 
         // Print the route diversion and details
         printRouteDiversion(&blueDiversion, &dest, &closestPt);
@@ -303,7 +307,7 @@ struct Point lineToShip(const struct Point dest, struct Route blueRoute, struct 
         printf("Ship on GREEN LINE, ");
 
         // Find the shortest path diversion from the green route to the destination point
-        struct Route greenDiversion = shortestPath(baseMap, closestPt, dest);
+        struct Route greenDiversion = shortestPath(&baseMap, closestPt, dest);
 
         // Print the route diversion and details
         printRouteDiversion(&greenDiversion, &dest, &closestPt);
@@ -313,7 +317,7 @@ struct Point lineToShip(const struct Point dest, struct Route blueRoute, struct 
         printf("Ship on YELLOW LINE, ");
 
         // Find the shortest path diversion from the yellow route to the destination point
-        struct Route yellowDiversion = shortestPath(baseMap, closestPt, dest);
+        struct Route yellowDiversion = shortestPath(&baseMap, closestPt, dest);
 
         // Print the route diversion and details
         printRouteDiversion(&yellowDiversion, &dest, &closestPt);
