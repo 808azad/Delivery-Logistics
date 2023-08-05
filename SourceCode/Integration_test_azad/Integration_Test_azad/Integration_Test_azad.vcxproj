@@ -18,6 +18,17 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="convert.h" />
+    <ClInclude Include="input.h" />
+    <ClInclude Include="mapping.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="converting_function.c" />
+    <ClCompile Include="input.c" />
+    <ClCompile Include="IntegrationTestingMain.c" />
+    <ClCompile Include="mapping.c" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -126,12 +137,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="blah.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="blah.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
