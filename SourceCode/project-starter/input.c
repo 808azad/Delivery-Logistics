@@ -205,32 +205,48 @@ struct Point rtnPtforDest(int row, int col) {
 
 
 // Function to print the route diversion (if any) and the destination point
+// Function to print the route diversion (if any) and the destination point
 void printRouteDiversion(const struct Route* diversion, const struct Route* originalRoute, const struct Point* dest) {
     // Loop variable
     int i;
 
-    // Check if there is a route diversion (if the number of points in the diversion is greater than 0)
-    if (diversion->numPoints > 0) {
-        // Print the message indicating a diversion is present
-        printf("divert: ");
+    double distanceToDest = distance(&diversion->points, dest);
+    //struct Point distanceToDest = distance(diversion->points[0], dest); //first round 11k and 12L
 
-        // Loop through the points in the diversion route and print them
-        for (i = 0; i < diversion->numPoints; i++) {
-            // Print a comma and space before each point except the first one
-            if (i > 0)
-                printf(", ");
+    if (distanceToDest == 0) { //return is 0 since idx[0].point == dest point shortest route returns this
 
-            // Print the row and column values of the current point in the diversion route
-            printf("%d%c", diversion->points[i].row, 'A' + diversion->points[i].col);
+        //need new path, the diversion is symbol is 0
+        
+
+        // Check if there is a route diversion (if the number of points in the diversion is greater than 0)
+        if (diversion->numPoints > 0) {
+            // Print the message indicating a diversion is present
+            printf("divert: ");
+
+            // Loop through the points in the diversion route and print them
+            for (i = 0; i < diversion->numPoints; i++) {
+                // Print a comma and space before each point except the first one
+                if (i > 0)
+                    printf(", ");
+
+                // Print the row and column values of the current point in the diversion route
+                printf("%d%c", diversion->points[i].row, 'A' + diversion->points[i].col); //take these two and 0 value
+            }
+
+            // Print the destination point's row and column values
+            printf(", %d%c", dest->row, 'A' + dest->col);
         }
+        //else {
+        //    // If there is no diversion needed, print this message
+        //    printf("No diversion needed. ");
+        //}
 
-        // Print the destination point's row and column values
-        printf(", %d%c", dest->row, 'A' + dest->col);
     }
-    else {
-        // If there is no diversion needed, print this message
-        printf("No diversion needed. ");
+    else if (distanceToDest < 2.0) {
+        printf("no diversion");
     }
+
+
 
     // Print a new line at the end of the function to separate output from the next print statement.
     printf("\n");
