@@ -39,8 +39,14 @@ int main() {
 	input(weight, size, dest2);
 	footer();
 
-	
-	
+	printf("\n\n\nCase 3: Testing the program for the valid weight. Expected to pass\n");
+	weight = 1005;
+	size = 0.5;
+	char dest3[4] = "12L";
+	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest2);
+	header();
+	input(weight, size, dest2);
+	footer();
 
 
 	return 0;
