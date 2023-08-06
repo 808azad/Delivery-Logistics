@@ -12,50 +12,64 @@ Group members:
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <string.h>
 #include "mapping.h"
 #include "input.h"
 
 
 int main() {
 	printf("*** Integration Testing of Input Functions ***\n\n\n");
-	
-	
-	printf("Case 1: Testing the program for intended purpose. Expected to pass\n");
+
+
+	printf("\n\nCase 1: Testing the program for handling invalid size.\n");
 	int weight = 20;
-	double size = 0.5;
-	char dest1[4] = "12L";
-	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest1);
+	double size = 0.2;
+	char dest[4] = "12L";
+	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest);
 	header();
-	input(weight, size, dest1);
+	input(weight, size, dest);
 	footer();
 
 
-	printf("\n\n\nCase 2: Testing the program for handling invalid size. Expected to pass\n");
-	weight = 20;
-	size = 0.2;
-    char dest2[4] = "12L";
-	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest2);
-	header();
-	input(weight, size, dest2);
-	footer();
-
-	printf("\n\n\nCase 3: Testing the program for handling invalid weight. Expected to pass\n");
+	printf("\n\n\nCase 2: Testing the program for handling invalid weight.\n");
 	weight = 1005;
 	size = 0.5;
-	char dest3[4] = "12L";
-	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest3);
+	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest);
 	header();
-	input(weight, size, dest3);
+	input(weight, size, dest);
 	footer();
 
-	printf("\n\n\nCase 4: Testing the program for handling invalid destination. Expected to pass\n");
+
+	printf("\n\n\nCase 3: Testing the program for handling invalid destination.\n");
 	weight = 20;
 	size = 0.5;
-	char dest4[4] = "28x";
-	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest4);
+	strcpy(dest, "28x");
+	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest);
 	header();
-	input(weight, size, dest4);
+	input(weight, size, dest);
 	footer();
+
+
+	printf("\n\n\nCase 4: Testing the program for proper shipment on the blue line without any diversion.\n");
+	weight = 20;
+	size = 0.5;
+	strcpy(dest, "12L");
+	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest);
+	header();
+	input(weight, size, dest);
+	footer();
+
+
+	printf("\n\n\nCase 5: Testing the program for proper shipment on the green line with diversion.\n");
+	weight = 200;
+	size = 1.0;
+	strcpy(dest, "8Y");
+	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest);
+	header();
+	input(weight, size, dest);
+	footer();
+
+
 
 	return 0;
 }
