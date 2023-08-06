@@ -28,7 +28,6 @@ struct PackageInf {
 	double m_boxSize; //valid range in cubic meter: 0.25, 0.5, 1 
 };
 
-
 //print out header onto console "Seneca Deliveries"
 void header();
 
@@ -36,7 +35,7 @@ void header();
 void footer();
 
 //get user input to enter package data related to weight, boxsize and destination, "0 0 x" to stop
-void input(struct PackageInf*);
+void input(int weight, double size, const char dest[]);
 
 
 

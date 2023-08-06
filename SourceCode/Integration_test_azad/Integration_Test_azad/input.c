@@ -69,7 +69,7 @@ int isDestinationValid(const struct Map* routeMap, int destRow, int destCol) {
 10. assign both strucks to shortest route
 */
 
-void input(struct PackageInf* pkg) {
+void input(int weight, double size, const char dest[]) {
     //always in order of [0]BLUE, [1]GREEN, [2]YELLOW, [3]temp for storage until line selected
     struct PackageInf trucks[4] = { {0} };
 
@@ -86,10 +86,6 @@ void input(struct PackageInf* pkg) {
     routeMap = addRoute(&routeMap, &yellowRoute);
 
 
-
-    int weight = 0.0;  //the weight 
-    double size = 0;  //the size
-    char dest[100] = { '\0' }; //keeping it a char of 100 in case user enters a ridiculous destination
     int stopInput = 0;  //flag to stop the input loop
 
     int numRow = 0;  //the broken row number form the input
@@ -97,7 +93,7 @@ void input(struct PackageInf* pkg) {
 
     while (!stopInput) {
         printf("\nEnter shipment weight, box size, and destination (0 0 x to stop): ");
-        int check_input = scanf("%d %lf %99s", &weight, &size, dest);  //get user input, accepting a large number in case user enters a ridiculous destination
+        int check_input = 3;  //get user input, accepting a large number in case user enters a ridiculous destination
         checkDestInput(dest, &numRow, &characterDest);  //check if the input is valid
 
 
@@ -110,12 +106,15 @@ void input(struct PackageInf* pkg) {
         }
         else if (!validatePackageWeight(weight)) {  //checks that pkg is a valid weight
             printf("Invalid weight (must be 1-1000 Kg.)\n");
+            stopInput = 1;
         }
         else if (!validatePackageBox(size)) {  //checks that pkg is a valid size
             printf("Invalid size\n");
+            stopInput = 1;
         }
         else if (numRow == 0 || characterDest == '\0' || numRow > 24) { //if the destination format is not valid
             printf("Invalid destination format\n");
+            stopInput = 1;
         }
         else {
             // Destination validation against the map routes
@@ -133,10 +132,12 @@ void input(struct PackageInf* pkg) {
                 //struct Point dest = translatedDirections(numRow, characterDest); // Setting delivery location
                 struct Point dest = rtnPtforDest(numRow, destCol); //convert to a Point
                 closestPt = lineToShip(dest, blueRoute, greenRoute, yellowRoute, trucks); //returns closest point, pass entire truck package array
+                stopInput = 1;
 
             }
             else {
                 printf("Invalid destination\n"); //if the destination is not valid
+                stopInput = 1;
             }
         }
 

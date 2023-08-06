@@ -17,21 +17,29 @@ Group members:
 
 
 int main() {
-	printf("*** Integration Testing of Input Functions ***\n\n");
-	struct PackageInf package = { 0 };
+	printf("*** Integration Testing of Input Functions ***\n\n\n");
 	
-	printf("Case 1: Testing how the program is going to exit\n");
-	printf("Values that will be used: 0 0 X\n\n");
+	
+	printf("Case 1: Testing the program for intended purpose. Expected to pass\n");
+	int weight = 20;
+	double size = 0.5;
+	char dest1[4] = "12L";
+	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest1);
 	header();
-	input(&package);
+	input(weight, size, dest1);
 	footer();
-	if (package.m_boxSize == 0 && package.m_weight == 0) {
-		printf("\n*** Case 1 is succesfully passed! ***\n");
-	}
-	else {
-		printf("\n*** Case 1 is failed! ***\n");
-	}
 
+
+	printf("\n\n\nCase 2: Testing the program for handling invalid size. Expected to pass\n");
+	weight = 20;
+	size = 0.2;
+    char dest2[4] = "12L";
+	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest2);
+	header();
+	input(weight, size, dest2);
+	footer();
+
+	
 	
 
 
