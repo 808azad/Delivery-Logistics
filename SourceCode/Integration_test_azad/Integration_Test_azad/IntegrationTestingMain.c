@@ -39,15 +39,23 @@ int main() {
 	input(weight, size, dest2);
 	footer();
 
-	printf("\n\n\nCase 3: Testing the program for the valid weight. Expected to pass\n");
+	printf("\n\n\nCase 3: Testing the program for handling invalid weight. Expected to pass\n");
 	weight = 1005;
 	size = 0.5;
 	char dest3[4] = "12L";
-	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest2);
+	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest3);
 	header();
-	input(weight, size, dest2);
+	input(weight, size, dest3);
 	footer();
 
+	printf("\n\n\nCase 4: Testing the program for handling invalid destination. Expected to pass\n");
+	weight = 20;
+	size = 0.5;
+	char dest4[4] = "28x";
+	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest4);
+	header();
+	input(weight, size, dest4);
+	footer();
 
 	return 0;
 }
