@@ -80,6 +80,16 @@ int main() {
 	footer();
 
 
+	printf("\n\n\nCase 7: Testing the program for proper shipment on the blue line with diversion (using the same values as in case 6).\n");
+	weight = 500;
+	size = 1.0;
+	strcpy(dest, "8Y");
+	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest);
+	header();
+	input(weight, size, dest);
+	footer();
+
+	
 
 	return 0;
 }
