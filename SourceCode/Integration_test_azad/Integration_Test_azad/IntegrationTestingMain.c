@@ -89,7 +89,15 @@ int main() {
 	input(weight, size, dest);
 	footer();
 
-	
+	//uncomment while running and perform the instuctions below
+	/*printf("\n\n\nCase 8: Testing the program for proper exiting (comment other test cases for running this one and comment the flags from line 109 - 141.\n");
+	weight = 0;
+	size = 0;
+	strcpy(dest, "X");
+	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest);
+	header();
+	input(weight, size, dest);
+	footer();*/
 
 	return 0;
 }
