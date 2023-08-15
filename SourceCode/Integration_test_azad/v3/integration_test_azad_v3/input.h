@@ -59,7 +59,7 @@ char returnSymb(const struct Map* routeMap, int destRow, int destCol);
 struct Point rtnPtforDest(int row, int col);
 
 //returns the closest based on dest arg point to main
-struct Point lineToShip(const struct Point dest, struct Route blueRoute, struct Route greenRoute, struct Route yellowRoute, struct PackageInf validPack[]);
+struct Point lineToShip(const struct Point dest, struct Route blueRoute, struct Route greenRoute, struct Route yellowRoute, struct PackageInf validPack[], const struct Map base);
 
 //prints the new route diversion onto console in '7T' format
 void printRouteDiversion(const struct Route* diversion, const struct Route* originalRoute, const struct Point* dest);

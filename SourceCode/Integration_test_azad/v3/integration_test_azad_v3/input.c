@@ -132,7 +132,7 @@ void input(int weight, double size, const char dest[]) {
                 //those are correcr fucntions 
                 //struct Point dest = translatedDirections(numRow, characterDest); // Setting delivery location
                 struct Point dest = rtnPtforDest(numRow, destCol); //convert to a Point
-                closestPt = lineToShip(dest, blueRoute, greenRoute, yellowRoute, trucks); //returns closest point, pass entire truck package array
+                closestPt = lineToShip(dest, blueRoute, greenRoute, yellowRoute, trucks, baseMap); ; //returns closest point, pass entire truck package array
 
                 //check if all trucks are full
                 for (int i = 0; i < 3; i++) {
@@ -266,7 +266,7 @@ void printRouteDiversion(const struct Route* diversion, const struct Route* orig
 
 
 // Function to find the closest point on the three routes (blue, green, and yellow) to the destination point
-struct Point lineToShip(const struct Point dest, struct Route blueRoute, struct Route greenRoute, struct Route yellowRoute, struct PackageInf validPack[])
+struct Point lineToShip(const struct Point dest, struct Route blueRoute, struct Route greenRoute, struct Route yellowRoute, struct PackageInf validPack[], const struct Map base)
 {// Loop variable
     double tempWeight = 0.0; //to store temp weight, only reassign when valid
     int i = 0, j = 0;
@@ -357,7 +357,7 @@ struct Point lineToShip(const struct Point dest, struct Route blueRoute, struct 
                 validPack[2].m_weight += tempWeight;
                 printf("Ship on YELLOW LINE, "); //new route
                 // Find the shortest path diversion from the blue route to the destination point
-                struct Route yellowDiversion = shortestPath(&yellowRoute, closestPt, dest);
+                struct Route yellowDiversion = shortestPath(&base, closestPt, dest);
                 // Print the route diversion and details
                 printRouteDiversion(&yellowDiversion, &yellowRoute, &dest);
             }
@@ -458,7 +458,7 @@ struct Point lineToShip(const struct Point dest, struct Route blueRoute, struct 
 
 
             // Find the shortest path diversion from the yellow route to the destination point
-            struct Route yellowDiversion = shortestPath(&yellowRoute, closestPt, dest);
+            struct Route yellowDiversion = shortestPath(&base, closestPt, dest);
 
             // Print the route diversion and details
             printRouteDiversion(&yellowDiversion, &yellowRoute, &dest);
@@ -473,7 +473,6 @@ struct Point lineToShip(const struct Point dest, struct Route blueRoute, struct 
     return closestPt;
 
 }
-
 
 ////hard code the 8Y divertion route
 //struct Route newPath8Y(void) {
