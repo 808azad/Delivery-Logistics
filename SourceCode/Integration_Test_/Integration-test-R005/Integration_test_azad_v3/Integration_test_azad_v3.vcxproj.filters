@@ -18,10 +18,10 @@
     <ClCompile Include="converting_function.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="mapping.c">
+    <ClCompile Include="IntegrationTestingMain.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IntegrationTestingMain_v3.c">
+    <ClCompile Include="mapping.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="input.c">

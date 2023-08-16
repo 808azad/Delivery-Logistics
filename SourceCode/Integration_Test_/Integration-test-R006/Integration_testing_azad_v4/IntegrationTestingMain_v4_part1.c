@@ -20,48 +20,27 @@ Group members:
 int main() {
 	printf("*** Integration Testing of Input Functions ***\n\n\n");
 
-	int weight = 500;
-	double size = 1.0;
-	char dest[4] = "12D";
-	
-	printf("\n\nCase 1: Testing the program for proper shipment on the yellow line with no diversion.\n");
+
+	printf("\n\nCase 1: Testing the program for handling invalid size.\n");
+	int weight = 20;
+	double size = 2;
+	char dest[4] = "12L";
 	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest);
 	header();
 	input(weight, size, dest);
 	footer();
 
 
-	printf("\n\n\nCase 2: Testing the program for ensuring that the shipment performed on yellow line without diversion.\n");
+	printf("\n\n\nCase 2: Testing the program for handling invalid weight.\n");
+	weight = 1005;
+	size = 0.5;
 	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest);
 	header();
 	input(weight, size, dest);
 	footer();
 
 
-	printf("\n\n\nCase 3: Testing the program for proper shipment on the blue line with no diversion.\n");
-	strcpy(dest, "12L");
-	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest);
-	header();
-	input(weight, size, dest);
-	footer();
-
-
-	printf("\n\n\nCase 4: Testing the program for ensuring that the shipment performed on blue line without diversion.\n");
-	strcpy(dest, "12L");
-	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest);
-	header();
-	input(weight, size, dest);
-	footer();
-
-
-	printf("\n\n\nCase 5: Testing the program for handling the case of trucks' full capacity\n");
-	strcpy(dest, "12L");
-	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest);
-	header();
-	input(weight, size, dest);
-	footer();
-	
-	printf("\n\n\nCase 6: Testing the program for handling invalid destination.\n");
+	printf("\n\n\nCase 3: Testing the program for handling invalid destination.\n");
 	weight = 20;
 	size = 0.5;
 	strcpy(dest, "28x");
@@ -71,24 +50,27 @@ int main() {
 	footer();
 
 
-	printf("\n\nCase 7: Testing the program for handling invalid size.\n");
+	printf("\n\n\nCase 4: Testing the program for proper shipment on the blue line without any diversion.\n");
 	weight = 20;
-	size = 2;
+	size = 0.5;
 	strcpy(dest, "12L");
 	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest);
 	header();
 	input(weight, size, dest);
 	footer();
 
-	printf("\n\n\nCase 8: Testing the program for handling invalid weight.\n");
-	weight = 1005;
-	size = 0.5;
+
+	printf("\n\n\nCase 5: Testing the program for proper shipment on the green line with diversion.\n");
+	weight = 200;
+	size = 1.0;
+	strcpy(dest, "8Y");
 	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest);
 	header();
 	input(weight, size, dest);
 	footer();
 
-	printf("\n\n\nCase 9: Testing the program for proper shipment on the green line with diversion.\n");
+
+	printf("\n\n\nCase 6: Testing the program for proper shipment on the green line with diversion (using another value).\n");
 	weight = 500;
 	size = 1.0;
 	strcpy(dest, "8Y");
@@ -98,7 +80,7 @@ int main() {
 	footer();
 
 
-	printf("\n\n\nCase 10: Testing the program for ensuring that the shipment performed on yellow line with diversion.\n");
+	printf("\n\n\nCase 7: Testing the program for proper shipment on the green line with diversion (using the same values as in case 6).\n");
 	weight = 500;
 	size = 1.0;
 	strcpy(dest, "8Y");
@@ -106,28 +88,6 @@ int main() {
 	header();
 	input(weight, size, dest);
 	footer();
-	
-	
-	/*
-
-	printf("\n\n\nCase 6: Testing the program for proper shipment on the green line with diversion (using another values).\n");
-	weight = 500;
-	size = 1.0;
-	strcpy(dest, "8Y");
-	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest);
-	header();
-	input(weight, size, dest);
-	footer();
-
-
-	printf("\n\n\nCase 7: Testing the program for proper shipment on the blue line with diversion (using the same values as in case 6).\n");
-	weight = 500;
-	size = 1.0;
-	strcpy(dest, "8Y");
-	printf("Values that will be used: %d %.1lf %s\n\n", weight, size, dest);
-	header();
-	input(weight, size, dest);
-	footer();*/
 
 	//uncomment while running and perform the instuctions below
 	/*printf("\n\n\nCase 8: Testing the program for proper exiting (comment other test cases for running this one and comment the flags from line 109 - 141.\n");
@@ -138,8 +98,6 @@ int main() {
 	header();
 	input(weight, size, dest);
 	footer();*/
-
-	
 
 	return 0;
 }
