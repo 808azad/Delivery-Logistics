@@ -69,7 +69,11 @@ If you would like to contribute to this project, please follow these guidelines:
 
 ## Acknowledgments
 Duzon Audrey  - Project Manager & Technical Lead
+<br>
 Alekseev Julia- Lead Programmer
+<br>
 Eom Tae Yong - Programmer
+<br>
 Chan Ka Ying- Tester
+<br>
 Zeynalov Azad- Tester
