@@ -1,6 +1,5 @@
 # Project Name: Delivery Logistics
 
-## Project Overview
 This repository contains the code and documentation for the SFT221 project, which involves designing and implementing a solution for a local delivery company. The goal of this project is to efficiently allocate packages to delivery trucks, ensuring that each package is assigned to a truck that can accommodate it and is closest to its destination. This README file provides an overview of the project, its objectives, and the algorithms used to achieve the desired outcomes.
 
 ## Learning Outcomes
